@@ -66,20 +66,30 @@ require 'dbconnection.php'
                         <?php
                         $query = "SELECT * FROM tbl_ticketbooking";
                         $query_run = mysqli_query($conn, $query);
+                        ?>
+                         <?php
 
-                        if(mysqli_num_rows($query_run) > 0) 
+                        // if(mysqli_num_rows($query_run) > 0) 
+                        while($rows=mysqli_fetch_assoc($query_run))
                         {
-                            foreach($query_run as $user)
+                            // 
+                            $a=$rows['reg_id'];
+                            $sq="SELECT * FROM 'registration' WHERE login_id='$a'";
+                            $sqq=mysqli_query($conn,$sq);
+                            echo" <tr>";
+                            while($row=mysqli_fetch_assoc($sqq))
                             {
                                 //echo $animal["AnimalName"]
+                                echo"<td>".$row['firstname']."</td>";
+                            }
                                 ?>
                                 <tr>
                                     
-                                    <td><?=$user['book_name'];?></td>
-                                    <td><?=$user['adult_num'];?></td>
-                                    <td><?=$user['student_num'];?></td>
-                                    <td><?=$user['child_num'];?></td>
-                                    <td><?=$user['b_date'];?></td>
+                                    
+                                    <td><?=$user['adult'];?></td>
+                                    <td><?=$user['student'];?></td>
+                                    <td><?=$user['child'];?></td>
+                                    <td><?=$user['date'];?></td>
                                     
                                     </tr>
                                 <?php
@@ -87,13 +97,13 @@ require 'dbconnection.php'
 
                             }
 
-                        }    
-                        else
-                        {
-                           echo "<h5> No Record Found </h5>";
-                        }   
+                           
+                        // else
+                        // {
+                        //    echo "<h5> No Record Found </h5>";
+                        // }   
                         
-                        ?>
+                        // ?>
 
                     
                       

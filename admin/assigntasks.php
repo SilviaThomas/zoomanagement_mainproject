@@ -82,7 +82,7 @@
                 </div>';
             }
             ?>
-            <h1 class="h3 mb-4 text-gray-800">AsSSIGN TASKS</h1>
+            <h1 class="h3 mb-4 text-gray-800">ASSSIGN TASKS</h1>
             <form class="form-sample"  method="post" enctype="multipart/form-data">
                 <input type="hidden" name="vacancy_id" value="">
                 <div class="mb-4 field-required">

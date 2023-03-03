@@ -73,26 +73,39 @@ require 'dbconnection.php'
                 </tr>
                 <tr>
 
-                  <td><?php echo $n++; ?></td>
-                  <td><?php echo $value['todo_name']; ?></td>
-                  <td><?php echo $value['user_name']; ?></td>
-                  <td><?php echo $value['todo_date']; ?></td>
-                  <?php if ($value['todo_status'] == 0): ?>
-                  <td><span class="label label-warning">Pending</span></td>
-                  <?php else: ?>
-                    <td><span class="label label-success">Completed</span></td>
-                  <?php endif; ?>
-                  <td><?php $comment = $value['todo_comment']; echo form_textarea(['name' => 'todo_comment', 'class' => 'form-control', 'id' => 'todo_comment', 'placeholder' => 'Enter ToDo Comment', 'rows' => '2', 'value' => $comment]); ?></td>
-                  <?php echo form_hidden("todoid", $todId); ?>
-                  <?php if( date("Y-m-d") != $value['todo_date'] or $value['todo_status'] != 0 ): ?>
-                  <td><?php echo form_submit('', 'Done', ['class' => 'btn btn-success', 'disabled' => '' ]); ?></td>
-                  <?php else: ?>
+                </thead>
+                      <tbody>
+                        <?php
+                        $query = "SELECT * FROM tbl_todo where firstname = 'admin' ";
+                        $counter = 0;
+                        $query_run = mysqli_query($conn, $query);
 
-                    <td><?php echo form_submit('', 'Done', ['class' => 'btn btn-success' ]); ?></td>
-                  <?php endif; ?>
-                </tr>
-                <?php echo form_close(); ?>
-
+                        if(mysqli_num_rows($query_run) > 0) 
+                        {
+                            foreach($query_run as $todo)
+                            {
+                                //echo $vaccancy["vaccancy_position"]
+                                ?>
+                                <tr>
+                                <td><?php echo ++$counter; ?></td>
+                                    
+                                    <td><?=$todo['taskname'];?></td>
+                                    <td><?=$todo['date'];?></td>
+                                    <td><?=$todo['status'];?></td>
+                                    <td><?=$todo['comment'];?></td>
+                                    <td>
+                                    <?php
+										if($todo['status']!="completed"){
+											echo '<a href="done.php?id='.$todo["todo_id"].'" class="btn btn-success btn-sm">DONE</a>';
+										}
+										else{
+											echo '<small>Already action performed</small>';
+										}
+                  }
+                }
+                                    ?>
+                                   
+                  
               </tbody></table>
 
             </div>

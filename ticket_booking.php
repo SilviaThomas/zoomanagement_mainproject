@@ -2,47 +2,11 @@
     session_start();
     error_reporting(0);
     include('dbconnection.php');
-?>
-<?php
-$conn = mysqli_connect('localhost','root','','zooproject');
-
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error."<br>");
-}
-else{
-  // echo "Success";
-}
+    $login_id =$_SESSION['sid'];
 
 
-if(isset($_POST['submit'])){
-  $book_name = $_POST['book_name'];
-  $child_num = $_POST['child_num'];
-  $student_num = $_POST['student_num'];
-  $adult_num = $_POST['adult_num'];
-  $b_date=$_POST['b_date']; 
-  
-  $sql="insert into tbl_ticketbooking(`book_name`,`child_num`,`student_num`,`adult_num`,`b_date`) 
-        VALUES('$book_name','$child_num','$student_num','$adult_num','$b_date')";
-        
-        $result=mysqli_query($conn,$sql);
-        //echo $sql;
-       if($result){
-        header('location:ticket_booking.php');
-       }else{
-        die(mysqli_error($conn));
-       }
-      
-      if($result == true ) {
-        echo '<script>alert("sucessfully created");</script>';
-   }
-  }
-  
-      
-
-
-
-
-// $ticketTable = new Table('tickets');
+  /*
+$ticketTable = new Table('tickets');
 if (isset($_POST['submit'])) {
     unset($_POST['submit']);
     $totalPrice = $_POST['adult_num'] * 60 + $_POST['child_num'] * 20 + $_POST['student_num'] * 30;
@@ -53,8 +17,31 @@ if (isset($_POST['submit'])) {
         header('Location:ticket_booking.php?msg=Ticket booked successfully!! Your total price is: Rs' . $totalPrice . '&type=success');
     }
 }
-
 $title = "Zoo - Ticket";
+*/
+if(isset($_POST['submit'])){
+
+  $adult = $_POST['adult'];
+  $student = $_POST['student'];
+  
+  $child= $_POST['child'];
+  $date=$_POST['date'];
+ 
+
+ 
+  $sql="INSERT INTO tbl_booking(`adult`,`student`,`child`,`date`,`reg_id`,`status`) 
+  VALUES('$adult','$student','$child','$date','$login_id',1)";
+
+      
+      $result=mysqli_query($conn,$sql);
+     
+      //echo $sql;
+     if($result)
+     {
+       echo "<script>alert('Booking successfully.')</script>";
+     }
+
+  } 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -222,28 +209,50 @@ $title = "Zoo - Ticket";
         <h2 class="lined mb-4">Book Tickets</h2> <!-- needs 600x400 image -->
         <div class="row">
             <div class="col-8">
-                <table class="table table-bordered table-striped table-hover">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">Ticket Group</th>
-                            <th scope="col">Price</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Regular</td>
-                            <td>Rs.60.00</td>
-                        </tr>
-                        <tr>
-                            <td>Student</td>
-                            <td>Rs.30.00</td>
-                        </tr>
-                        <tr>
-                            <td>Child</td>
-                            <td>Rs.20.00</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <table class="table align-items-center table-flush table-hover" id="dataTableHover">
+                    <thead class="thead-light">
+                      <tr>
+                        <th>Ticket Group</th>
+                        <th>price</th>
+                        
+                        
+                      </tr>
+                      </thead>
+                      <tbody>
+                        <?php
+                        $query = "SELECT * FROM tbl_tickets where status='1'";
+                        $query_run = mysqli_query($conn, $query);
+
+                        if(mysqli_num_rows($query_run) > 0) 
+                        {
+                            foreach($query_run as $tickets)
+                            {
+                                //echo $vaccancy["vaccancy_position"]
+                                ?>
+                                <tr>
+                                    <td><?=$tickets['ticket_group'];?></td>
+                                    <td><?=$tickets['price'];?></td>
+                                   
+                                    
+                                    
+                                    </tr>
+                                <?php
+
+
+                            }
+
+                        }    
+                        else
+                        {
+                           echo "<h5> No Record Found </h5>";
+                        }   
+                        
+                        ?>
+
+                    
+                      
+                  </table>
+                  
 
                 <div class="mt-5">
                     <h5>Select Number of Tickets</h5>
@@ -256,38 +265,35 @@ $title = "Zoo - Ticket";
                          </div>';
                     } ?>
                     <form action="ticket_booking.php" method="POST" action="#">
-                        <div class="form-group row">
-                            <label for="name" class="col-sm-2 col-form-label">Name:</label>
-                            <div class="col-sm-5">
-                                <input type="text" class="form-control" id="name" name="book_name" placeholder="Name of person who books the tickets" required onblur="return fnameValidate()"/>
-                            </div>
-                            <div><span id="fnameValidate" class="validate"></span></div>
-                        </div>
+                      
+                    <table class="table:stripped">
+                      
+                        
                         <div class="form-group row">
                             <label for="regular" class="col-sm-2 col-form-label">Adult:</label>
                             <div class="col-sm-4">
-                                <input type="number" class="form-control" id="regular" value="0" name="adult_num" required />
+                            <input type="number" id="adult" name="adult" placeholder="adult" min="1" required>
                             </div>
                             <div><span id="countValidate" class="validate"></span></div>
                         </div>
                         <div class="form-group row">
                             <label for="student" class="col-sm-2 col-form-label">Student:</label>
                             <div class="col-sm-4">
-                                <input type="number" class="form-control" id="student" value="0" name="student_num" required />
+                            <input type="number" id="student" name="student" placeholder="student" min="1" required>
                             </div>
                             <div><span id="countValidate1" class="validate"></span></div>
                         </div>
                         <div class="form-group row">
                             <label for="child" class="col-sm-2 col-form-label">Child:</label>
                             <div class="col-sm-4">
-                                <input type="number" class="form-control" id="child" value="0" name="child_num" required />
+                            <input type="number" id="child" name="child" placeholder="child" min="1" required>
                             </div>
                             <div><span id="countValidate2" class="validate"></span></div>
                         </div>
                         <div class="form-group row">
                             <label for="date" class="col-sm-2 col-form-label">Date:</label>
                             <div class="col-sm-4">
-                                <input type="date" class="form-control" id="date" value="0" name="b_date" required>
+                                <input type="date" id="date" name="date" required>
                             </div>
                         </div>
                         <div class="form-group row mt-4">
@@ -297,8 +303,47 @@ $title = "Zoo - Ticket";
                               
                             </div>
                         </div>
-                    
+                  </table>
                     </form>
+
+                    <?php
+    
+ $conn = mysqli_connect('localhost','root','','zoosystem');
+
+ if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error."<br>");
+}
+else{
+  // echo  "Success";
+}
+?>
+<!-- <php
+$price = $price; // the price of the item
+$quanti = 2; // the quantity of the item
+$tax_rate = 0.1; // the tax rate as a decimal
+
+$sub_total = $price * $quantity; // calculate the subtotal
+$tax_amount = $sub_total * $tax_rate; // calculate the tax amount
+$total_amount = $sub_total + $tax_amount; // calculate the total amount
+
+echo "Subtotal: $" . number_format($sub_total, 2) . "<br>"; 
+echo "Tax: $" . number_format($tax_amount, 2) . "<br>"; 
+echo "Total: $" . number_format($total_amount, 2); -->
+
+
+<tr></div>
+<div>
+<div class="card" style="width: 18rem;">
+  
+  <div class="card-body">
+    <h5 class="card-title">TOTAL AMOUNT</h5>
+    <p class="card-text"><?php $totalPrice = $_POST['adult'] * 45 + $_POST['child'] * 20 + $_POST['student'] * 30?>
+    <a href="#" class="btn btn-primary">Make payment</a>
+  </div>
+</div>
+</div>
+</tr>
+    
 
                 </div>
 
@@ -370,8 +415,7 @@ $title = "Zoo - Ticket";
               />
               <button
                 type="button"
-                class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2"
-              >
+                class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">
                 SignUp
               </button>
             </div>

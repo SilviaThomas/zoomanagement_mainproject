@@ -56,6 +56,7 @@
     <div id="packageForm2" class="collapse" aria-labelledby="headingForm" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">BOOKINGS</h6>
+        <a class="collapse-item" href="add_tickets.php"><Var>Add tickets</Var></a>
         <a class="collapse-item" href="booking_view.php"><Var>View Bookings</Var></a>
         
       </div>
