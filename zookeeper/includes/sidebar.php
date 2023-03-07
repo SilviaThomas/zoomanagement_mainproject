@@ -56,6 +56,20 @@
       </div>
     </div>
     </li>
+    <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#users5" aria-expanded="true" aria-controls="collapseTable">
+      <i class="fas fa-fw fa-table"></i>
+      <span>LEAVE</span>
+    </a>
+    <div id="users5" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <h6 class="collapse-header">Apply Leave</h6>
+        <a class="collapse-item" href="leavestatus.php"> Leave Status</a>
+        <a class="collapse-item" href="applyleave.php">Apply Leave</a>
+        
+      </div>
+    </div>
+    </li>
     
 
   

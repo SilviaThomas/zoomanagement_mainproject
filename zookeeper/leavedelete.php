@@ -3,11 +3,11 @@
 if(isset($_GET["id"]))
  {
     
-    $vaccancy=$_GET['id'];
-    $select="UPDATE tbl_vaccancy SET vaccancy_status=0 WHERE vaccancy_id='$vaccancy'";
+    $leave=$_GET['id'];
+    $select="UPDATE tbl_leave SET status=0 WHERE leave_id='$leave'";
     $result=mysqli_query($conn,$select);
     echo '<script type="text/javascript">alert("deleted successfully.")</script>';
-    header('location: view_vaccancy.php');
+    header('location: leavestatus.php');
    
 }
 ?>

@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require 'dbconnection.php'
 
 ?>
@@ -14,7 +14,7 @@ require 'dbconnection.php'
   <meta name="description" content="">
   <meta name="author" content="">
   <link href="img/logo/logo.png" rel="icon">
-  <title>Admin - manage Animals</title>
+  <title>Admin - manage leave</title>
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="css/ruang-admin.min.css" rel="stylesheet">
@@ -34,10 +34,10 @@ require 'dbconnection.php'
         <!-- Container Fluid-->
         <div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Registered view</h1>
+            <h1 class="h3 mb-0 text-gray-800">Manage Leave</h1>
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Manage Animals</li>
+              <li class="breadcrumb-item active" aria-current="page">Manage leave</li>
             </ol>
           </div>
 
@@ -56,15 +56,17 @@ require 'dbconnection.php'
                       <tr>
                         
                         <th>Name</th>
-                        <th>Adult</th>
-                        <th>Student </th>
-                        <th>Child</th>
-                        <th>Date</th>
+                        <th>Start Date</th>
+                        <th>Last Date  </th>
+                        <th>Reason</th>
+                        <th>Action</th>
+                        <!-- <th>Action</th> -->
                       </tr>
                       </thead>
                       <tbody>
                         <?php
-                        $query = "SELECT * FROM tbl_ticketbooking";
+                        $login_id =$_SESSION['sid'];
+                        $query = "SELECT * FROM tbl_leave WHERE status='pending' ";
                         $query_run = mysqli_query($conn, $query);
                         ?>
                          <?php
@@ -72,29 +74,49 @@ require 'dbconnection.php'
                         // if(mysqli_num_rows($query_run) > 0) 
                         while($rows=mysqli_fetch_assoc($query_run))
                         {
-                            // 
+                            
                             $a=$rows['reg_id'];
-                            $sq="SELECT * FROM 'registration' WHERE login_id='$a'";
+                            // echo "$a";
+                            $sq="SELECT * FROM 'tbl_zookeeperreg' WHERE login_id='$a'";
                             $sqq=mysqli_query($conn,$sq);
-                            echo" <tr>";
-                            while($row=mysqli_fetch_assoc($sqq))
-                            {
-                                //echo $animal["AnimalName"]
-                                echo"<td>".$rows['firstname']."</td>";
-                            }
+                            // $row=mysqli_fetch_assoc($sqq);
+                            $ss=mysqli_query($conn,"SELECT `email` FROM `tbl_login` WHERE login_id='$a'");
+                            $row=mysqli_fetch_assoc($ss);
+                            $name=$row['email'];
+                            // echo "$name";
+                            // while($row=mysqli_fetch_assoc($sqq))
+                            // {
+                                 
+                            // echo" <tr>";
+
+                            //     //echo $animal["AnimalName"]
+                            //     echo"<td>".$row['firstname']."</td>";
+                            //     echo " </tr>";
+                            // }
                                 ?>
                                 <tr>
+                                <td><?=$name;?></td>
                                     
+                                    <td><?=$rows['start_date'];?></td>
+                                    <td><?=$rows['last_date'];?></td>
+                                    <td><?=$rows['reason'];?></td>
+                                    <!-- <td><?=$rows['date'];?></td> -->
+                                    <td>
+                                    <?php
                                     
-                                    <td><?=$user['adult'];?></td>
-                                    <td><?=$user['student'];?></td>
-                                    <td><?=$user['child'];?></td>
-                                    <td><?=$user['date'];?></td>
+											echo '<a href="leavedone.php?id='.$rows["leave_id"].'" class="btn btn-success btn-sm">ACCEPT</a>';
+                      echo '<a href="leavereject.php?id='.$rows["leave_id"].'" class="btn btn-danger btn-sm">REJECT</a>';
+                      
+										?>
+                    
+                    </td> 
                                     
                                     </tr>
+                        
                                 <?php
 
 
+                        
                             }
 
                            
@@ -103,7 +125,7 @@ require 'dbconnection.php'
                         //    echo "<h5> No Record Found </h5>";
                         // }   
                         
-                        // ?>
+                     ?>
 
                     
                       

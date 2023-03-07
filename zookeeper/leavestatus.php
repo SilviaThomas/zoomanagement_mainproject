@@ -8,13 +8,22 @@ require 'dbconnection.php'
 <html lang="en">
 
 <head>
+<script type="text/javascript">
+        function preventBack() {
+            window.history.forward(); 
+        }
+          
+        setTimeout("preventBack()", 0);
+          
+        window.onunload = function () { null };
+    </script>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
   <link href="img/logo/logo.png" rel="icon">
-  <title>Admin - manage Animals</title>
+  <title>admin -view todo</title>
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="css/ruang-admin.min.css" rel="stylesheet">
@@ -34,14 +43,14 @@ require 'dbconnection.php'
         <!-- Container Fluid-->
         <div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Registered view</h1>
+            <h1 class="h3 mb-0 text-gray-800">View todo</h1>
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Manage Animals</li>
+              <li class="breadcrumb-item active" aria-current="page">view todo</li>
             </ol>
           </div>
 
-          <!-- Row -->
+        
           <div class="row">
             <!-- Datatables -->
             <!-- DataTable with Hover -->
@@ -50,60 +59,75 @@ require 'dbconnection.php'
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                   <h6 class="m-0 font-weight-bold text-primary"></h6>
                 </div>
+                <div >
                 <div class="table-responsive p-3">
-                  <table class="table align-items-center table-flush table-hover">
+                  <table class="table align-items-center table-flush table-hover" id="dataTableHover">
                     <thead class="thead-light">
                       <tr>
+                      <th>#</th>
+                        <th>start_date</th>
+                        <th>last_date</th>
+                        <th>reason</th>
+                        <th>status</th>
+                        <th>Action</th>
                         
-                        <th>Name</th>
-                        <th>Adult</th>
-                        <th>Student </th>
-                        <th>Child</th>
-                        <th>Date</th>
                       </tr>
                       </thead>
                       <tbody>
                         <?php
-                        $query = "SELECT * FROM tbl_ticketbooking";
+                        $query = "SELECT * FROM tbl_leave Where status='pending' OR status='accepted'OR status='rejected' ";
+                        $counter = 0;
                         $query_run = mysqli_query($conn, $query);
-                        ?>
-                         <?php
 
-                        // if(mysqli_num_rows($query_run) > 0) 
-                        while($rows=mysqli_fetch_assoc($query_run))
+                        if(mysqli_num_rows($query_run) > 0) 
                         {
-                            // 
-                            $a=$rows['reg_id'];
-                            $sq="SELECT * FROM 'registration' WHERE login_id='$a'";
-                            $sqq=mysqli_query($conn,$sq);
-                            echo" <tr>";
-                            while($row=mysqli_fetch_assoc($sqq))
+                            foreach($query_run as $leave)
                             {
-                                //echo $animal["AnimalName"]
-                                echo"<td>".$rows['firstname']."</td>";
-                            }
+                                //echo $vaccancy["vaccancy_position"]
                                 ?>
                                 <tr>
+                                <td><?php echo ++$counter; ?></td>
                                     
+                                    <td><?=$leave['start_date'];?></td>
+                                    <td><?=$leave['last_date'];?></td>
+                                    <td><?=$leave['reason'];?></td>
+                                    <td><?=$leave['status'];?></td>
+                                    <td>
+                                
+										<a href="leavedelete.php?id=<?=$leave['leave_id'];?>" class="btn btn-danger btn-sm">DELETE</a>
                                     
-                                    <td><?=$user['adult'];?></td>
-                                    <td><?=$user['student'];?></td>
-                                    <td><?=$user['child'];?></td>
-                                    <td><?=$user['date'];?></td>
+                                   
+                                    </td> 
+                                    <td>
+                                    <?php
+                         
+                        //  if($todo['status']==0){
+                        //    echo '<p><a href="inactive.php?todo_id='.$todo['todo_id'].'$status=0"style="color:red;font-size:17px;">pending</a></p>';
+                        //  }else{
+                        //    echo '<p><a href="active.php?todo_id='.$todo['todo_id'].'$status=1"style="color:green;font-size:17px;">completed</a></p>';
+                        //  }
+                         ?>
+                         </td>
+                              
                                     
+                                    <!-- <td><=$todo['comment'];?></td> -->
+                                    
+                              
+                                    
+                                     
                                     </tr>
                                 <?php
 
 
                             }
 
-                           
-                        // else
-                        // {
-                        //    echo "<h5> No Record Found </h5>";
-                        // }   
+                        }    
+                        else
+                        {
+                           echo "<h5> No Record Found </h5>";
+                        }   
                         
-                        // ?>
+                        ?>
 
                     
                       
@@ -122,7 +146,7 @@ require 'dbconnection.php'
       </div>
 
       <!-- Footer -->
-      <!-- <?php include('includes/footer.php');?> -->
+     
       <!-- Footer -->
     </div>
   </div>

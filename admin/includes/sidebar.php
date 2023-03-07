@@ -94,6 +94,20 @@
       </div>
     </div>
     </li>
+    <li>
+    <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#userss" aria-expanded="true" aria-controls="collapseTable">
+      <i class="fas fa-fw fa-table"></i>
+      <span>Leave</span>
+    </a>
+    <div id="userss" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <h6 class="collapse-header">Leave</h6>
+        <a class="collapse-item" href="manageleave.php">Manage Employee Leave</a>
+        
+      </div>
+    </div>
+    </li>
 
     <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#users2" aria-expanded="true" aria-controls="collapseTable">

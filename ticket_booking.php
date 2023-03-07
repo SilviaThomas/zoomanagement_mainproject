@@ -4,6 +4,11 @@
     include('dbconnection.php');
     $login_id =$_SESSION['sid'];
 
+	session_start();
+    error_reporting(0);
+    include('dbconnection.php');
+    $login_id =$_SESSION['sid'];
+
 
   /*
 $ticketTable = new Table('tickets');
@@ -19,29 +24,6 @@ if (isset($_POST['submit'])) {
 }
 $title = "Zoo - Ticket";
 */
-if(isset($_POST['submit'])){
-
-  $adult = $_POST['adult'];
-  $student = $_POST['student'];
-  
-  $child= $_POST['child'];
-  $date=$_POST['date'];
- 
-
- 
-  $sql="INSERT INTO tbl_booking(`adult`,`student`,`child`,`date`,`reg_id`,`status`) 
-  VALUES('$adult','$student','$child','$date','$login_id',1)";
-
-      
-      $result=mysqli_query($conn,$sql);
-     
-      //echo $sql;
-     if($result)
-     {
-       echo "<script>alert('Booking successfully.')</script>";
-     }
-
-  } 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -92,6 +74,19 @@ if(isset($_POST['submit'])){
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet" />
+
+	<style>
+		input::-webkit-outer-spin-button,
+		input::-webkit-inner-spin-button {
+			-webkit-appearance: none;
+			margin: 0;
+		}
+
+		input[type=number]{
+			-moz-appearance: textfield;
+		}
+
+	</style>
   </head>
 
   <body>
@@ -225,22 +220,15 @@ if(isset($_POST['submit'])){
 
                         if(mysqli_num_rows($query_run) > 0) 
                         {
-                            foreach($query_run as $tickets)
-                            {
+                            foreach($query_run as $tickets){
                                 //echo $vaccancy["vaccancy_position"]
                                 ?>
                                 <tr>
                                     <td><?=$tickets['ticket_group'];?></td>
-                                    <td><?=$tickets['price'];?></td>
-                                   
-                                    
-                                    
+                                    <td id="tick_<?=$tickets['ticket_group'];?>"><?=$tickets['price'];?></td>
                                     </tr>
                                 <?php
-
-
                             }
-
                         }    
                         else
                         {
@@ -264,29 +252,30 @@ if(isset($_POST['submit'])){
                         </button>
                          </div>';
                     } ?>
-                    <form action="ticket_booking.php" method="POST" action="#">
+                    <form action="ticket_booking.php" method="POST">
                       
                     <table class="table:stripped">
-                      
-                        
                         <div class="form-group row">
                             <label for="regular" class="col-sm-2 col-form-label">Adult:</label>
                             <div class="col-sm-4">
-                            <input type="number" id="adult" name="adult" placeholder="adult" min="1" required>
+                            <input type="number" onkeyup="readData(0);" id="adult" name="adult" placeholder="adult" min="1" required>
+                            <input type="text" name="adult_price" id="adult_price" hidden>
                             </div>
                             <div><span id="countValidate" class="validate"></span></div>
                         </div>
                         <div class="form-group row">
                             <label for="student" class="col-sm-2 col-form-label">Student:</label>
                             <div class="col-sm-4">
-                            <input type="number" id="student" name="student" placeholder="student" min="1" required>
+                            <input type="number" id="student" onkeyup="readData(1);" name="student" placeholder="student" min="1" required>
+                            <input type="text" name="student_price" id="student_price" hidden>
                             </div>
                             <div><span id="countValidate1" class="validate"></span></div>
                         </div>
                         <div class="form-group row">
                             <label for="child" class="col-sm-2 col-form-label">Child:</label>
                             <div class="col-sm-4">
-                            <input type="number" id="child" name="child" placeholder="child" min="1" required>
+                            <input type="number" id="child" onkeyup="readData(2);" name="child" placeholder="child" min="1" required>
+                            <input type="text" name="child_price" id="child_price" hidden>
                             </div>
                             <div><span id="countValidate2" class="validate"></span></div>
                         </div>
@@ -298,9 +287,7 @@ if(isset($_POST['submit'])){
                         </div>
                         <div class="form-group row mt-4">
                             <div class="col-sm-10">
-                                
-                                    <button type="submit" class="btn btn-primary" name="submit">Book Ticket</button>
-                              
+                                <input type="submit" class="btn btn-primary" name="cal_price_submit" value="Calculate Price">
                             </div>
                         </div>
                   </table>
@@ -337,8 +324,8 @@ echo "Total: $" . number_format($total_amount, 2); -->
   
   <div class="card-body">
     <h5 class="card-title">TOTAL AMOUNT</h5>
-    <p class="card-text"><?php $totalPrice = $_POST['adult'] * 45 + $_POST['child'] * 20 + $_POST['student'] * 30?>
-    <a href="#" class="btn btn-primary">Make payment</a>
+    <p class="card-text" id="total_price_txt"></p>
+    <a href="#" class="btn btn-primary">Make Payment</a>
   </div>
 </div>
 </div>
@@ -461,5 +448,66 @@ echo "Total: $" . number_format($total_amount, 2); -->
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+
+    <script>
+      $(document).ready(function() {
+          var adult_price= document.getElementById('tick_adult');
+          document.getElementById('adult_price').value=adult_price.innerHTML;
+
+          var student_price= document.getElementById('tick_student');
+          document.getElementById('student_price').value=student_price.innerHTML;
+
+          var child_price= document.getElementById('tick_child');
+          document.getElementById('child_price').value=child_price.innerHTML;
+      });
+    </script>
   </body>
 </html>
+
+<?php
+    
+    if(isset($_POST['cal_price_submit'])){
+		$adult = $_POST['adult'];
+		$student = $_POST['student'];
+		$child= $_POST['child'];
+		$date=$_POST['date'];
+		$adult_price= $_POST['adult_price'];
+		$student_price= $_POST['student_price'];
+		$child_price= $_POST['child_price'];
+
+		// echo "<script>alert('".$adult_price." and ".$student_price."');</script>";
+		$total_price= $adult*$adult_price + $student*$student_price + $child*$child_price;
+		echo "<script>document.getElementById('total_price_txt').innerHTML = '".$total_price."';</script>";
+    } 
+?>
+
+<script>
+	function readData(field){
+		var cadult=document.getElementById('adult').value;
+		var cstudent=document.getElementById('student').value;
+		var cchild=document.getElementById('child').value;
+
+		if(field==2){
+			var adult_count= cadult!="" ? cadult : 0;
+			var student_count= cstudent!="" ? cstudent : 0;
+			var child_count= cchild!="" ? cchild : 0;
+		}
+		else if(field==1){
+			var adult_count= cadult!="" ? cadult : 0;
+			var student_count= cstudent!="" ? cstudent : 0;
+			var child_count= 0;
+		}
+		else{
+			var adult_count= cadult!="" ? cadult : 0;
+			var student_count= 0;
+			 var child_count= 0;
+		}
+
+		var adult_price= document.getElementById('adult_price').value;
+		var student_price= document.getElementById('student_price').value;
+		var child_price= document.getElementById('child_price').value;
+
+		var total_price= adult_count*adult_price + student_count*student_price + child_count*child_price;
+		document.getElementById('total_price_txt').innerHTML = total_price;
+	}
+</script>
