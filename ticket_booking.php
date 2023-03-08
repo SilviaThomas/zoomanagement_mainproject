@@ -4,10 +4,10 @@
     include('dbconnection.php');
     $login_id =$_SESSION['sid'];
 
-	session_start();
-    error_reporting(0);
-    include('dbconnection.php');
-    $login_id =$_SESSION['sid'];
+	// session_start();
+  //   error_reporting(0);
+  //   include('dbconnection.php');
+  //   $login_id =$_SESSION['sid'];
 
 
   /*
@@ -287,7 +287,7 @@ $title = "Zoo - Ticket";
                         </div>
                         <div class="form-group row mt-4">
                             <div class="col-sm-10">
-                                <input type="submit" class="btn btn-primary" name="cal_price_submit" value="Calculate Price">
+                                <input type="submit" class="btn btn-primary" name="cal_price_submit" value="save">
                             </div>
                         </div>
                   </table>
@@ -474,6 +474,23 @@ echo "Total: $" . number_format($total_amount, 2); -->
 		$adult_price= $_POST['adult_price'];
 		$student_price= $_POST['student_price'];
 		$child_price= $_POST['child_price'];
+    $sql="INSERT INTO tbl_booking( `adult`, `student`, `child`, `date`, `reg_id`, `status`) 
+    VALUES ('$adult','$student','$child','$date','$login_id',1)";
+		// $sql="insert into tbl_booking(`adult`,`student`,`child`,`date`,`reg_id`,`status`) 
+    //     VALUES('$adult','$student','$child','$date','$login_id',1)";
+        $result=mysqli_query($conn,$sql);
+        //echo $sql;
+       if($result){
+        echo '<script>window.location.href="ticketbooking.php";</script>';
+       }else{
+        die(mysqli_error($conn));
+       }
+      
+      if($result == true ) {
+        echo '<script>alert("sucessfully created");</script>';
+   }
+  
+
 
 		// echo "<script>alert('".$adult_price." and ".$student_price."');</script>";
 		$total_price= $adult*$adult_price + $student*$student_price + $child*$child_price;
