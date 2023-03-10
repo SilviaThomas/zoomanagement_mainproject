@@ -2,7 +2,7 @@
     session_start();
     error_reporting(0);
     include('dbconnection.php');
-    $login_id =$_SESSION['sid'];
+    $n =$_SESSION['sid'];
 
 	// session_start();
   //   error_reporting(0);
@@ -74,7 +74,8 @@ $title = "Zoo - Ticket";
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet" />
-
+    <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 	<style>
 		input::-webkit-outer-spin-button,
 		input::-webkit-inner-spin-button {
@@ -198,6 +199,7 @@ $title = "Zoo - Ticket";
     <div id="wrapper">
 		
 		<!-- start header -->
+    
 		
 <section class="py-5 bg-gray">
     <div class="container py-5">
@@ -325,7 +327,8 @@ echo "Total: $" . number_format($total_amount, 2); -->
   <div class="card-body">
     <h5 class="card-title">TOTAL AMOUNT</h5>
     <p class="card-text" id="total_price_txt"></p>
-    <a href="#" class="btn btn-primary">Make Payment</a>
+    <!-- <a href="#" class="btn btn-primary">Make Payment</a> -->
+    <td><input type="button" id="rzp-button1" name="btn" value="pay now"class="btn btn-primary" onclick="pay_now()"/>
   </div>
 </div>
 </div>
@@ -343,6 +346,7 @@ echo "Total: $" . number_format($total_amount, 2); -->
                 </div>
             </section>
         </div>
+        <input type="hidden" id="name1" value="<?php echo $n; ?>">
         <div>
         <div>
         <p class="container-fluid footer bg-dark text-light footer mt-5 pt-5 wow fadeIn"
@@ -461,6 +465,47 @@ echo "Total: $" . number_format($total_amount, 2); -->
           document.getElementById('child_price').value=child_price.innerHTML;
       });
     </script>
+    <script>
+  if ( window.history.replaceState ) {
+  window.history.replaceState( null, null, window.location.href );
+}
+</script>
+<script>
+//   console.log("hello");
+// var amt ="100";
+    function pay_now(){
+		var name = jQuery('#name1').val();
+		console.log(name);
+		
+        var amount=<?php echo $n ?>;
+        var options =  {
+            "key": "rzp_test_CAVq5bb2GLYpRx", // Enter the Key ID generated from the Dashboard
+            "amount": amount*100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+            "currency": "INR",
+            "name": "ZOOFAARII",
+            "description": "Test Transaction",
+            "image": "https://example.com/your_logo",
+            "handler":function(response){
+              
+               jQuery.ajax({
+                   type:"POST",
+                   url: "payment_process.php",
+                   data:"payment_id="+response.razorpay_payment_id+"&amount="+amount+"&name="+name,
+                   success:function(result){
+                       window,location.href="thankyou.php";
+                   }
+               });
+              
+      }
+        
+    
+};
+var rzp1 = new Razorpay(options);
+
+    rzp1.open();
+    
+    }
+</script>
   </body>
 </html>
 

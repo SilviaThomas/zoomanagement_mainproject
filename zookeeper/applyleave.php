@@ -9,9 +9,16 @@ if(isset($_POST['submit'])){
   
   $start_date = $_POST['start_date'];
   $last_date = $_POST['last_date'];
+
+
+  $img=$_FILES["image"]["name"];
+  echo $img;
+  move_uploaded_file($_FILES["image"]["tmp_name"],"cert_img/".$img);
+
   
-  $sql="INSERT INTO tbl_leave(`reg_id`,`reason`,`start_date`,`last_date`,`status`) 
-  VALUES('$login_id','$reason','$start_date','$last_date','pending')";
+  
+  $sql="INSERT INTO tbl_leave(`reg_id`,`reason`,`start_date`,`last_date`,`med_certificate`,`status`) 
+         VALUES('$login_id','$reason','$start_date','$last_date','$img','pending')";
   {
 
         
@@ -48,7 +55,7 @@ if(isset($_POST['submit'])){
   <meta name="description" content="">
   <meta name="author" content="">
   <link href="img/logo/logo.png" rel="icon">
-  <title>Admin - Add Vaccancy</title>
+  <title>zookeeper - apply leave</title>
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="css/ruang-admin.min.css" rel="stylesheet">
@@ -116,7 +123,7 @@ if(isset($_POST['submit'])){
                             <div class="card-body pt-5 shadow">
                               
                                     <h4 class="text-center">Apply For Leave</h4>
-                                <form method="POST" action="#">
+                                <form method="POST" action="applyleave.php" enctype="multipart/form-data">
                                 
                                     <div class="form-group">
                                         <label >Reason :</label>
@@ -133,6 +140,12 @@ if(isset($_POST['submit'])){
                                         <label >Last Date :</label>
                                         <input type="date" class="form-control"  value=""  name="last_date" >
                                         
+                                    </div>
+                                    <br>
+
+                                    <div class="input-box">
+                                      <span class="details">upload medical certificate</span>
+                                      <input type="file" name="image" id="certificateimage">
                                     </div>
 
                                     <div class="form-group">
