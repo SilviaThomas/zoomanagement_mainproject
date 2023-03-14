@@ -1,78 +1,142 @@
-
-<form name="chngpwd" action="" method="post" onSubmit="return valid();">
-<table align="center">
-<tr height="50">
-<td>Old Password :</td>
-<td><input type="password" name="log_password" id="opwd"></td>
-</tr>
-<tr height="50">
-<td>New Passowrd :</td>
-<td><input type="password" name="npwd" id="npwd"></td>
-</tr>
-<tr height="50">
-<td>Confirm Password :</td>
-<td><input type="password" name="cpwd" id="cpwd"></td>
-</tr>
-<tr>
-<td><a href="index.php">Back to login Page</a></td>
-<td><input type="submit" name="Submit" value="Change Passowrd" /></td>
-</tr>
- </table>
-</form>
-
-
-
-
-<script type="text/javascript">
-function valid()
-{
-if(document.chngpwd.opwd.value=="")
-{
-alert("Old Password Filed is Empty !!");
-document.chngpwd.opwd.focus();
-return false;
-}
-else if(document.chngpwd.npwd.value=="")
-{
-alert("New Password Filed is Empty !!");
-document.chngpwd.npwd.focus();
-return false;
-}
-else if(document.chngpwd.cpwd.value=="")
-{
-alert("Confirm Password Filed is Empty !!");
-document.chngpwd.cpwd.focus();
-return false;
-}
-else if(document.chngpwd.npwd.value!= document.chngpwd.cpwd.value)
-{
-alert("Password and Confirm Password Field do not match  !!");
-document.chngpwd.cpwd.focus();
-return false;
-}
-return true;
-}
-</script>
-
-
 <?php
+include 'dbconnection.php';
 session_start();
-include("dbconnection.php");
-if(isset($_POST['Submit']))
-{
- $log_password=md5($_POST['log_password']);
- $email=$_SESSION['email'];
- $newpassword=md5($_POST['npwd']);
-$sql=mysqli_query($conn,"SELECT log_password FROM tbl_login where log_password='$log_password' && email='$email'");
-$num=mysqli_fetch_array($sql);
-if($num>0)
-{
- $con=mysqli_query($conn,"update tbl_login set password=' $newpassword' where email='$email'");
-$_SESSION['msg1']="Password Changed Successfully !!";
-}
-else
-{
-$_SESSION['msg1']="Old Password not match !!";
-}
+// if(!empty($_SESSION['email']))
+// {
+//     echo $_SESSION['email'];
+// }
+$login_id =$_SESSION['sid'];
+// echo $pass_value;
+if(isset($_POST['submit_reset'])){
+    $log_password = $_POST['log_password'];
+    $cpass = $_POST['cpass'];
+    $encr = md5($log_password);
+    if($log_password != $cpass){
+        echo '<script> alert ("Password doesnot match");</script>';
+        echo'<script>window.location.href="changepassword.php";</script>';
+    }
+    else{
+        $insert = "UPDATE `tbl_login` SET `log_password`='$encr' WHERE `login_id`='$login_id'";
+        mysqli_query($conn,$insert);
+        echo '<script> alert ("Password updated successfully");</script>';
+        echo'<script>window.location.href="http://localhost/zoofari-1.0.0/Login.php";</script>';
+    }
 }
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <title>Password</title>
+    <style>
+        body{
+            background-color: #DEDEDE;
+        }
+     .navbar {
+        overflow: hidden;
+        background-color: #333;
+        position: absolute;
+        width: 100%;
+        left: 0px;
+        top: 0px;
+        }
+
+
+        .navbar a {
+        float: right;
+        color: white;
+        padding-top: 30px;
+        margin-right: 50px;
+        text-decoration: none;
+        font-family: 'Itim';
+        }
+        .navbar a.left {
+            float: left;
+            padding: 0%;
+            padding-left: 25px;
+        }
+        .navbar a:hover {
+        color: rgb(185, 185, 185);
+        }
+        .ticket{
+            position: absolute;
+            width: 561px;
+            height: 497px;
+            left: 807px;
+            top: 163px;
+        }
+        table{
+            position: absolute;
+            left: 550px;
+            top: 200px;
+        }
+        table label{
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 23px;
+            line-height: 48px;
+        }
+        input:not([type=submit]){
+            box-sizing: border-box;
+            background: #D9D9D9;
+            border: 2px solid #757070;
+            border-radius: 9px;
+            padding: 10px;
+            width: 300px;
+            height: 45px;
+        }
+        input[type="submit"] {
+            position: absolute;
+            background: #1E1E1E;
+            top: 230px;
+            height: 40px;
+            width: 90px;
+            border-radius: 20px;
+            color: white;
+            border: none;
+            font-family: 'Poppins';
+            
+        }
+        input[type="submit"]:hover{
+            background-color: #000000;
+            cursor: pointer;
+        }
+        ::placeholder{
+            font-family: 'Poppins';
+            padding-left: 8px;
+            font-weight: 700;
+        }
+        </style>
+        <script>
+            function validateForm() {
+    var pw1 = document.getElementById("log_password").value;
+    var pw2 = document.getElementById("cpass").value;
+    if(pw2!="" && pw1 != pw2) {
+        document.getElementById('msg1').style.display = "block";
+        document.getElementById('msg1').innerHTML = "Password doesnot match";
+        return false;
+    }
+    else{
+        document.getElementById('msg1').style.display = "none";
+    }
+}
+        </script>
+</head>
+<body>
+    
+    <form action="" method="POST" onsubmit ="return validateForm()">
+    <table>
+        <tr><td><label for="pass">New password</label></td></tr>
+        <tr><td><input type="password" name="log_password" id="pass" onblur="return validateForm()" onKeyUp="return validateForm()" placeholder="Enter your new password here" required></td></tr>
+        <tr><td><label for="cpass">Confirm password</label></td></tr>
+        <tr><td><input type="password" name="cpass" id="cpass" onblur="return validateForm()" onKeyUp="return validateForm()" placeholder="Enter your password again here" required></td></tr>
+        <tr><td><span id="msg1" style="color: red;"></span></td></tr>
+        <tr><td><input type="submit" name="submit_reset" value="Reset"></td></tr>
+    </table>
+    </form>
+</body>
+</html>
