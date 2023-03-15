@@ -476,8 +476,9 @@ echo "Total: $" . number_format($total_amount, 2); -->
     function pay_now(){
 		var name = jQuery('#name1').val();
 		console.log(name);
-		
-        var amount=<?php echo $n ?>;
+    var amount = document.getElementById("total_price_txt").textContent;
+     console.log(amount);
+        // var amount=<?php echo $n ?>;
         var options =  {
             "key": "rzp_test_CAVq5bb2GLYpRx", // Enter the Key ID generated from the Dashboard
             "amount": amount*100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
