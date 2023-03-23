@@ -1,3 +1,7 @@
+<?php session_start(); 
+include('dbconnection.php');
+$sid=$_SESSION['sid'];
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -161,13 +165,19 @@
           <a href="contact.php" class="nav-item nav-link">Contact</a>
         </div>
         <a href="ticket_booking.php" class="btn btn-primary"
-          >Buy Ticket<i class="fa fa-arrow-right ms-3"></i
-></a>
+          >Buy Ticket<i class="fa fa-arrow-right ms-3"></i></a>
       </div>
+      <a class="nav-link" href="userhome.php"><?php
+                        $sel = "SELECT `email` FROM `tbl_login` where `login_id`=$sid";
+                        $query = mysqli_query($conn,$sel);
+                        $resul = mysqli_fetch_assoc($query);
+                        ?>
+                         <?php echo $resul['email'];?>  
+ </a>
       
       <a href="logout.php" class="nav-item nav-link">Logout</a>
-      <!-- <a href="userhome.php"><
-        php echo $_SESSION['username']; ?></a> -->
+      
+      
     </nav>
     <!-- Navbar End -->
 

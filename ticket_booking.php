@@ -284,7 +284,7 @@ $title = "Zoo - Ticket";
                         <div class="form-group row">
                             <label for="date" class="col-sm-2 col-form-label">Date:</label>
                             <div class="col-sm-4">
-                                <input type="date" id="date" name="date" required>
+                                <input type="date" id="date" name="date" min= "<?php echo date('Y-m-d');?>"required>
                             </div>
                         </div>
                         <div class="form-group row mt-4">
@@ -554,6 +554,7 @@ var rzp1 = new Razorpay(options);
 			var adult_count= cadult!="" ? cadult : 0;
 			var student_count= cstudent!="" ? cstudent : 0;
 			var child_count= cchild!="" ? cchild : 0;
+      
 		}
 		else if(field==1){
 			var adult_count= cadult!="" ? cadult : 0;

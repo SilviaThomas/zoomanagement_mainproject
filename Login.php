@@ -40,13 +40,13 @@
         <div class="error error-txt">Password can't be blank</div>
       </div>
      	
-<div class="g-recaptcha" data-sitekey="6LcePAATAAAAAGPRWgx90814DTjgt5sXnNbV5WaW"></div>
+
       
       
       <div class="pass-txt"><a href="login-system-main/recover_psw.php">Forgot password?</a></div>
       <input type="submit" name="submit" value="Login">
     </form>
-    <script src='https://www.google.com/recaptcha/api.js'></script>
+    
     
     <div class="sign-txt">Not yet member? <a href="register.php">sign up</a></div>
     <p><p></p><a href="index.php">Back to Home</a>&nbsp;&nbsp;&nbsp;</p></p>

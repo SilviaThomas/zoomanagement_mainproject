@@ -182,7 +182,7 @@
 
                           
                         <?php
-                        $sel = "SELECT *  FROM tbl_login where role='1'";
+                        $sel = "SELECT *  FROM tbl_login where role='2'";
                         $query = mysqli_query($conn,$sel);
                         $resul = mysqli_fetch_assoc($query);
                         ?>
