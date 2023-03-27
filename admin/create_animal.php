@@ -18,6 +18,7 @@
   <meta name="author" content="">
   <link href="img/logo/logo.png" rel="icon">
   <title>Admin - Create Animal</title>
+  <script src="js\createanimal.js"></script>
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="css/ruang-admin.min.css" rel="stylesheet">
@@ -72,16 +73,18 @@
                 </div>
                 <div class="card-body">
                 
-      <form class="form-sample"  method="post" enctype="multipart/form-data">
+      <form class="form-sample"  method="post" onsubmit="lo" enctype="multipart/form-data">
         <div class="user-details">
           <div class="input-box">
-            <span class="details">AnimalName</span>
-            <input type="text" class="form-control" name="AnimalName" id="animalname" placeholder="Animal Name" required>
+            
+            <input type="text" class="form-control" name="AnimalName" id="animalname" placeholder="Animal Name" required onblur="return animalnameValidate()"/>
+            <span id="animalnamevalidate" style="color:red;" class="details"></span>
           </div>
           <br>
           <div class="input-box">
-            <span class="details">CageNumber</span>
-            <input type="text" class="form-control" name="CageNumber" id="cage" placeholder=" Cage Number" required>
+            
+            <input type="text" class="form-control" name="CageNumber" id="cage" placeholder=" Cage Number" required onblur="return cagenumber()"/>
+            <span id="cagenumbervalidate" class="details">CageNumber</span>
           </div>
           <br>
           <!-- <div class="input-box">
@@ -90,8 +93,9 @@
           </div> -->
           <br>
           <div class="input-box">
-            <span class="details">AnimalDetails</span>
-            <textarea class="form-control" rows="5" cols="50" name="Description" id="details" placeholder="Animal Details" required></textarea> 
+           
+            <textarea class="form-control" rows="5" cols="50" name="Description" id="details" placeholder="Animal Details" required onblur="return detailsValidate()"></textarea>
+            <span id="detailsvalidate" style="color:red;"  class="details"></span> 
           </div>
           <br>
           <div class="input-box">
@@ -225,24 +229,22 @@ if(isset($_POST['submit'])){
   //$CreationDate=$_POST['CreationDate'];
   // $AnimalImage=$_FILES["AnimalImage"]["name"];
   move_uploaded_file($_FILES["image"]["tmp_name"],"an_image/".$img);
-	//$result=mysqli_query($con,"INSERT INTO `tbl_details`(`name`, `address`, `phone`, `photo`) VALUES ('$name','$address','$phone','$img')");
+  $query = "SELECT * FROM `tbl_animals` Where CageNumber='$CageNumber'";
+  $result = mysqli_query($conn,$query);
+  
+   if(mysqli_num_rows($result)>0)
+   {
+      // echo "item exits";
+      echo "<script>alert('Cage Already filled.');window.location.href='create_animal.php'</script>";
+  
+   }
+   else{
 
-  // $path="../an_img/";
-  // $image_ext = pathinfo($AnimalImage, PATHINFO_EXTENSION);
-  // $filename = time().'.'.$image_ext; 
-
-
-  //$tmpname=$_FILES["AnimalImage"]["tmp_name"];
-  //$folder="an_img/";
-  //$image_src="an_img/".$AnimalImage;
- // move_uploaded_file($_FILES["AnimalImage"]["tmp_name"],$folder.$_AnimalImage);
-  // $allData=implode(",",$datas);
-  // $price=$_POST['price'];
-// Attempt insert query execution
   $sql="insert into tbl_animals(`AnimalName`,`CageNumber`,`Breed`,`AnimalImage`,`Description`,`status`) 
         VALUES('$AnimalName','$CageNumber','$Breed','$img','$Description',1)";
         
         $result=mysqli_query($conn,$sql);
+   }
         //echo $sql;
        if($result){
         header('location:create_animal.php');

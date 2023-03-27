@@ -281,7 +281,7 @@ input[type=submit]:hover {
       </div>
       <div class="col-75">
       
-          <input type="file" name="pdf" value="" required>
+      <input id="pdf" type="file" name="pdf" value="" required><br><br>
                 
       
     </div>
@@ -314,12 +314,18 @@ if(isset($_POST['submit'])){
   $email = $_POST['email'];
   $phone= $_POST['phone'];
   $pdf=$_FILES['pdf']['name'];
-  $pdf_type=$_FILES['pdf']['type'];
-  $pdf_size=$_FILES['pdf']['size'];
-  $pdf_tem_loc=$_FILES['pdf']['tmp_name'];
-  $pdf_store="D:\xampp\htdocs\zoofari-1.0.0\pdf".$pdf;
+          $pdf_type=$_FILES['pdf']['type'];
+          $pdf_size=$_FILES['pdf']['size'];
+          $pdf_tem_loc=$_FILES['pdf']['tmp_name'];
+          $pdf_store="pdf/".$pdf;
+          move_uploaded_file($pdf_tem_loc,$pdf_store);
+  // $pdf=$_FILES['pdf']['name'];
+  // $pdf_type=$_FILES['pdf']['type'];
+  // $pdf_size=$_FILES['pdf']['size'];
+  // $pdf_tem_loc=$_FILES['pdf']['tmp_name'];
+  // $pdf_store="D:\xampp\htdocs\zoofari-1.0.0\pdf".$pdf;
 
-  move_uploaded_file($pdf_tem_loc,$pdf_store);
+  // move_uploaded_file($pdf_tem_loc,$pdf_store);
 
 
   // $img=$_FILES["pdf_file"]["name"];

@@ -19,6 +19,7 @@ function lnameValidate(){
     var lastname = document.getElementById("fname").value;
     var pattern =  /^[a-zA-Z]+$/;
     isValid=true;
+    
     if(lastname.match(pattern)){
     document.getElementById("fnameValidate").innerHTML="";
     }
