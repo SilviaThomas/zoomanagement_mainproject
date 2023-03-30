@@ -59,6 +59,9 @@ require 'dbconnection.php'
                         <th>Start Date</th>
                         <th>Last Date  </th>
                         <th>Reason</th>
+                        <th>download</th>
+
+
                         <th>Action</th>
                         <!-- <th>Action</th> -->
                       </tr>
@@ -100,6 +103,14 @@ require 'dbconnection.php'
                                     <td><?=$rows['start_date'];?></td>
                                     <td><?=$rows['last_date'];?></td>
                                     <td><?=$rows['reason'];?></td>
+                                  <td><a href="../zookeeper/cert_img/<?php echo $rows['med_certificate']; ?>" class="btn btn-info" download="<?php echo $rows['med_certificate']; ?>.pdf">Download</a></td>
+
+                                    
+      
+        
+        
+      
+
                                     <!-- <td><?=$rows['date'];?></td> -->
                                     <td>
                                     <?php

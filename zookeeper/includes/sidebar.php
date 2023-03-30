@@ -87,6 +87,19 @@
       </div>
     </div>
     </li>
+    <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#use" aria-expanded="true" aria-controls="collapseTable">
+      <i class="fas fa-fw fa-table"></i>
+      <span>prediction</span>
+    </a>
+    <div id="use" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <h6 class="collapse-header">prediction</h6>
+        <a class="collapse-item" href="">predict Disease</a>
+        
+      </div>
+    </div>
+    </li>
     
     
     <li class="nav-item">

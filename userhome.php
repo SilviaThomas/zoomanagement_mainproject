@@ -5,6 +5,8 @@ $sid=$_SESSION['sid'];
 <!DOCTYPE html>
 <html lang="en">
   <head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.1/font/bootstrap-icons.css">
+
   <script type="text/javascript">
     (function(d, m){
         var kommunicateSettings = 
@@ -167,15 +169,45 @@ $sid=$_SESSION['sid'];
         <a href="ticket_booking.php" class="btn btn-primary"
           >Buy Ticket<i class="fa fa-arrow-right ms-3"></i></a>
       </div>
-      <a class="nav-link" href="userhome.php"><?php
+      <div class="dropdown">
+    <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="bi bi-person"></i>
+        <?php
+            $sel = "SELECT `email` FROM `tbl_login` where `login_id`=$sid";
+            $query = mysqli_query($conn,$sel);
+            $resul = mysqli_fetch_assoc($query);
+            echo $resul['email'];
+        ?>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <li><a class="dropdown-item" href="logout.php">Logout</a></li>
+    </ul>
+</div>
+
+      <!-- <div class="dropdown">
+    <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+        <?php
+            $sel = "SELECT `email` FROM `tbl_login` where `login_id`=$sid";
+            $query = mysqli_query($conn,$sel);
+            $resul = mysqli_fetch_assoc($query);
+            echo $resul['email'];
+        ?>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <li><a class="dropdown-item" href="logout.php">Logout</a></li>
+    </ul>
+</div> -->
+
+      
+      
+      <!-- <a href="logout.php" class="nav-item nav-link">Logout</a>
+      <a class="nav-link" href="userhome.php"><php
                         $sel = "SELECT `email` FROM `tbl_login` where `login_id`=$sid";
                         $query = mysqli_query($conn,$sel);
                         $resul = mysqli_fetch_assoc($query);
                         ?>
-                         <?php echo $resul['email'];?>  
- </a>
-      
-      <a href="logout.php" class="nav-item nav-link">Logout</a>
+                         <php echo $resul['email'];?>  
+ </a> -->
       
       
     </nav>

@@ -11,14 +11,36 @@ if(isset($_POST['submit'])){
   $last_date = $_POST['last_date'];
 
 
-  $img=$_FILES["image"]["name"];
-  echo $img;
-  move_uploaded_file($_FILES["image"]["tmp_name"],"cert_img/".$img);
+  $targetDir = "cert_img/";
+  $targetFile = $targetDir . basename($_FILES["pdfFile"]["name"]);
+  $fileType = strtolower(pathinfo($targetFile,PATHINFO_EXTENSION));
+
+  if($fileType != "pdf" || $_FILES["pdfFile"]["size"] > 2000000){
+    echo "Error:Only PDF files less than 2MB are allowed to upload";
+  }
+  else{
+    if(move_uploaded_file($_FILES["pdfFile"]["tmp_name"], $targetFile)){
+
+      $filename = $_FILES["pdfFile"]["name"];
+      $folder_path = $targetDir;
+
+    }
+  }
+  }
+
+
+
+
+
+
+  // $img=$_FILES["image"]["name"];
+  // echo $img;
+  // move_uploaded_file($_FILES["image"]["tmp_name"],"cert_img/".$img);
 
   
   
   $sql="INSERT INTO tbl_leave(`reg_id`,`reason`,`start_date`,`last_date`,`med_certificate`,`status`) 
-         VALUES('$login_id','$reason','$start_date','$last_date','$img','pending')";
+         VALUES('$login_id','$reason','$start_date','$last_date','$filename','pending')";
   {
 
         
@@ -31,7 +53,7 @@ if(isset($_POST['submit'])){
        }
       
   }
-}
+
 
       
 ?>
@@ -145,7 +167,7 @@ if(isset($_POST['submit'])){
 
                                     <div class="input-box">
                                       <span class="details">upload medical certificate</span>
-                                      <input type="file" name="image" id="certificateimage">
+                                      <input type="file" name="pdfFile" class="form-control-file" id="pdfFile">
                                     </div>
 
                                     <div class="form-group">
