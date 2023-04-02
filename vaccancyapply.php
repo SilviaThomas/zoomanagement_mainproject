@@ -338,6 +338,7 @@ if(isset($_POST['submit'])){
         VALUES('$vacancy_id','$fullname','$email','$phone','$pdf',1)";
         
         $result=mysqli_query($conn,$sql);
+}
         //echo $sql;
        if($result){
         header('location:vaccancyapply.php');

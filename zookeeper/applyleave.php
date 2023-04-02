@@ -3,61 +3,7 @@
     error_reporting(0);
     include('dbconnection.php');
     $login_id =$_SESSION['sid'];
-
-if(isset($_POST['submit'])){
-  $reason = $_POST['reason'];
-  
-  $start_date = $_POST['start_date'];
-  $last_date = $_POST['last_date'];
-
-
-  $targetDir = "cert_img/";
-  $targetFile = $targetDir . basename($_FILES["pdfFile"]["name"]);
-  $fileType = strtolower(pathinfo($targetFile,PATHINFO_EXTENSION));
-
-  if($fileType != "pdf" || $_FILES["pdfFile"]["size"] > 2000000){
-    echo "Error:Only PDF files less than 2MB are allowed to upload";
-  }
-  else{
-    if(move_uploaded_file($_FILES["pdfFile"]["tmp_name"], $targetFile)){
-
-      $filename = $_FILES["pdfFile"]["name"];
-      $folder_path = $targetDir;
-
-    }
-  }
-  }
-
-
-
-
-
-
-  // $img=$_FILES["image"]["name"];
-  // echo $img;
-  // move_uploaded_file($_FILES["image"]["tmp_name"],"cert_img/".$img);
-
-  
-  
-  $sql="INSERT INTO tbl_leave(`reg_id`,`reason`,`start_date`,`last_date`,`med_certificate`,`status`) 
-         VALUES('$login_id','$reason','$start_date','$last_date','$filename','pending')";
-  {
-
-        
-        $result=mysqli_query($conn,$sql);
-        //echo $sql;
-       if($result){
-        echo '<script>alert("Leave Applied Sucessfully");</script>';
-       }else{
-        die(mysqli_error($conn));
-       }
-      
-  }
-
-
-      
-?>
-
+    ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -81,6 +27,7 @@ if(isset($_POST['submit'])){
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="css/ruang-admin.min.css" rel="stylesheet">
+  <script src="js/leaveapply.js"></script>
   <style>
     .errorWrap {
       padding: 10px;
@@ -118,14 +65,14 @@ if(isset($_POST['submit'])){
         <!-- Topbar -->
 
         <!-- Container Fluid-->
-        <div class="container-fluid" id="container-wrapper">
+        <!-- <div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800"></h1>
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
               <li class="breadcrumb-item active" aria-current="page"></li>
             </ol>
-          </div>
+          </div> -->
 
           <div class="row">
             <div class="col-lg-12">
@@ -149,26 +96,39 @@ if(isset($_POST['submit'])){
                                 
                                     <div class="form-group">
                                         <label >Reason :</label>
-                                        <input type="text" class="form-control" value=" " name="reason" >  
-                                                
+                                        <input type="text" class="form-control" value=" " name="reason" id="reason" required onblur="return reasonValidate()">  
+                                        <div><span id="validatereason" style="color:red;" class="validate"></span></div>       
                                     </div>
 
-                                    <div class="form-group">
+                                     <!-- <div class="form-group">
                                         <label >Staring Date :</label>
-                                        <input type="date" class="form-control"  value=""  name="start_date" >
-                                        
+                                        <input type="date" class="form-control" value="" name="start_date" id="startdate" required onblur="return dateValidate();">
+                                        <div><span id="dateValidate" style="color:red;" class="validate"></span></div> 
                                     </div>
                                     <div class="form-group">
                                         <label >Last Date :</label>
-                                        <input type="date" class="form-control"  value=""  name="last_date" >
+                                        <input type="date" class="form-control" value="" name="last_date" id="lastdate" required onblur="return dateValidate();">
+                                        <div><span id="dateValidate" style="color:red;" class="validate"></span></div> 
                                         
-                                    </div>
+                                    </div>  -->
+                                    <div class="form-group">
+    <label for="start_date">Start Date:</label>
+    <input type="date" class="form-control" value="" name="start_date" id="startdate" required onblur="return dateValidate();">
+  </div>
+  <div class="form-group">
+    <label for="last_date">Last Date:</label>
+    <input type="date" class="form-control" value="" name="last_date" id="lastdate" required onblur="return dateValidate();">
+  </div>
                                     <br>
+                                    <div class="form-group" id="mcupload" style="display: none;">
+    <label for="medical_certificate">Medical Certificate:</label>
+    <input type="file" class="form-control" name="pdfFile" id="pdfFile">
+  </div>
 
-                                    <div class="input-box">
+                                    <!-- <div class="input-box">
                                       <span class="details">upload medical certificate</span>
                                       <input type="file" name="pdfFile" class="form-control-file" id="pdfFile">
-                                    </div>
+                                    </div> -->
 
                                     <div class="form-group">
                                         <input type="submit" name="submit" value="submit" class="btn btn-primary btn-lg w-100 "  >
@@ -183,3 +143,72 @@ if(isset($_POST['submit'])){
     </div>
 </div>
 
+<?php
+$conn = mysqli_connect('localhost','root','','zooproject');
+
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error."<br>");
+}
+else{
+  // echo "Success";
+}
+
+if(isset($_POST['submit'])){
+  $reason = $_POST['reason'];
+  
+  $start_date = $_POST['start_date'];
+  $last_date = $_POST['last_date'];
+
+
+  $targetDir = "cert_img/";
+  $targetFile = $targetDir . basename($_FILES["pdfFile"]["name"]);
+  $fileType = strtolower(pathinfo($targetFile,PATHINFO_EXTENSION));
+
+  if($fileType != "pdf" || $_FILES["pdfFile"]["size"] > 2000000){
+    echo "Error:Only PDF files less than 2MB are allowed to upload";
+  }
+  else{
+    if(move_uploaded_file($_FILES["pdfFile"]["tmp_name"], $targetFile)){
+
+      $filename = $_FILES["pdfFile"]["name"];
+      $folder_path = $targetDir;
+
+    }
+  }
+  }
+  
+
+
+
+
+
+
+  // $img=$_FILES["image"]["name"];
+  // echo $img;
+  // move_uploaded_file($_FILES["image"]["tmp_name"],"cert_img/".$img);
+
+
+  
+  $sql="INSERT INTO tbl_leave(`reg_id`,`reason`,`start_date`,`last_date`,`med_certificate`,`status`) 
+         VALUES('$login_id','$reason','$start_date','$last_date','$filename','pending')";
+  {
+
+        
+        $result=mysqli_query($conn,$sql);
+  }
+        //echo $sql;
+       if($result){
+        header('location:applyleave.php');
+        // echo '<script>alert("Leave Applied Sucessfully");</script>';
+       }else{
+        die(mysqli_error($conn));
+       }
+       if($result == true ) {
+        echo '<script>alert("sucessfully completed");</script>';
+   }
+      
+  
+
+
+      
+?>

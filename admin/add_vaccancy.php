@@ -21,6 +21,7 @@
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="css/ruang-admin.min.css" rel="stylesheet">
+  <script src="js/vaccancy.js"></script>
   <style>
     .errorWrap {
       padding: 10px;
@@ -87,28 +88,48 @@
                 <input type="hidden" name="vacancy_id" value="">
                 <div class="mb-4 field-required">
                     <label for="class_display_name">Position</label>
-                    <input type="text" value="" class="form-control" id="class_display_name" placeholder="Eg: Receptionist" name="vaccancy_position" required>
-                </div>
+                    <input type="text" value="" class="form-control" id="positionvalidate" placeholder="Eg: Receptionist" name="vaccancy_position"  required onblur="return vpositionValidate()">
+                    <div><span id="position" style="color:red;"  class="validate"></span></div>
+                  </div>
                 <div class="mb-4 field-required">
                     <label for="v_description">Description</label>
-                    <textarea name="vaccancy_description" placeholder="...." class="form-control" id="vaccancy_description" cols="30" rows="5" required></textarea>
-                </div>
-                <div class="mb-4 field-required">
+                    <textarea name="vaccancy_description" placeholder="...." class="form-control" id="vaccancy_description" cols="30" rows="5" required onblur="return descValidate()"></textarea>
+                    <div><span id="desc" style="color:red;"  class="validate"></span></div>
+                  </div>
+                <!-- <div class="mb-4 field-required">
                     <label for="v_type">Vacancy Type</label>
-                    <select class="custom-select d-block w-100" name="vaccancy_type" id="vaccancy_type" required >
+                    <select class="custom-select d-block w-100" name="vaccancy_type" id="vaccancy_type" required onblur="return typeValidate()" >
                         <option value="permanent" >Permanent</option>;
                         <option value="temporary" >Temporary</option>;
                     </select>
+                    <div><span id="type" style="color:red;"  class="validate"></span></div>
+                </div> -->
+                                <div class="mb-4 field-required">
+                    <label for="v_type">Vacancy Type</label>
+                    <select class="custom-select d-block w-100" name="vaccancy_type" id="vaccancy_type" required onblur="return typeValidate()">
+                        <option value="" selected disabled>Select Vacancy Type</option>
+                        <option value="permanent">Permanent</option>
+                        <option value="temporary">Temporary</option>
+                    </select>
+                    <div><span id="type" style="color:red;" class="validate"></span></div>
                 </div>
-                <div class="mb-4 field-required">
+                <!-- <div class="mb-4 field-required">
                     <label for="v_start_date">Contract Start Date</label>
-                    <input type="date"  name= "start_date" value="" class="form-control" name="start_date" id="start_date" required>
+                    <input type="date"  name= "start_date" value="" class="form-control" name="start_date" id="start_date" required onblur="return dateValidate()" >
+                    <div><span id="date" style="color:red;"  class="validate"></span></div>
+                  </div> -->
+                                  <div class="mb-4 field-required" id="start-date-field">
+                    <label for="v_start_date">Contract Start Date</label>
+                    <input type="date" name="start_date" value="" class="form-control" id="start_date" required onblur="return dateValidate()">
+                    <div><span id="date" style="color:red;" class="validate"></span></div>
                 </div>
-                <div class="mb-4">
-                    <label for="v_end_date">Contract End Date</label>
-                    <input type="date" name= "end_date" value="" class="form-control" name="end_date" id="end_date">
-                    <small>For temporary vacancy</small>
-                </div>
+                      
+                <div class="mb-4" id="end-date-field" style="display: none;">
+                      <label for="v_end_date">Contract End Date</label>
+                      <input type="date" name="end_date" value="" class="form-control" id="end_date">
+                      <small>For temporary vacancy</small>
+                      <div><span id="end-date" style="color:red;" class="validate"></span></div>
+                  </div>
                 <button class="btn btn-primary btn-lg btn-block" type="submit" name="submit">Vacancy</button>
             </form>
         </div>
@@ -140,7 +161,7 @@ if(isset($_POST['submit'])){
         $result=mysqli_query($conn,$sql);
         //echo $sql;
        if($result){
-        header('location:add_vaccancy.php');
+        echo '<script>window.location.href="add_vaccancy.php";</script>';
        }else{
         die(mysqli_error($conn));
        }

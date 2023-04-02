@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <link href="img/logo/logo.png" rel="icon">
-  <title>Admin - Create Animal</title>
+  <title>Admin - Add zookeeper</title>
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="css/ruang-admin.min.css" rel="stylesheet">
@@ -150,8 +150,11 @@
                             
                      
                             <div class="form-group">
-                                <input type="email" class="form-input" name="email"  placeholder="Email Id" required/>
+                            <input type="email" class="form-input" name="email" id="email" placeholder="Email Id" required onblur="return validateemail()"/>
+    <div><span id="validateemail" class="validate"></span></div>
                             </div>
+                            
+
 
                             <div class="form-group">
                                 <input type="password" class="form-input" name="log_password" id="log_password" placeholder="Password" required onblur="return validatepwd()"/>
