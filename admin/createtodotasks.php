@@ -17,10 +17,11 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <link href="img/logo/logo.png" rel="icon">
-  <title>Admin - Add Vaccancy</title>
+  <title>Admin - Add todo</title>
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="css/ruang-admin.min.css" rel="stylesheet">
+  <script src="js/todo.js"></script>
   <style>
     .errorWrap {
       padding: 10px;
@@ -87,12 +88,14 @@
                 <input type="hidden" name="vacancy_id" value="">
                 <div class="mb-4 field-required">
                     <label for="class_display_name">TASK NAME</label>
-                    <input type="text" value="" class="form-control" id="taskname" name="taskname" required>
-                </div>
+                    <input type="text" value="" class="form-control" id="taskname" name="taskname" required onblur="return tnameValidate();">
+                    <div><span id="validatetname" style="color:red;" class="validate"></span></div>  
+                  </div>
                 <div class="mb-4 field-required">
                     <label for="v_description">COMMENT</label>
-                    <textarea name="comment" placeholder="...." class="form-control" id="comment" cols="30" rows="5" required></textarea>
-                </div>
+                    <textarea name="comment" placeholder="...." class="form-control" id="comment" cols="30" rows="5" required onblur="return commentValidate();"></textarea>
+                    <div><span id="validatetcomment" style="color:red;" class="validate"></span></div>
+                  </div>
                 
                 <button class="btn btn-primary btn-lg btn-block" type="submit" name="submit">Create  my todo</button>
             </form>

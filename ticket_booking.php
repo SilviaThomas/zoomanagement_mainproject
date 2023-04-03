@@ -76,6 +76,7 @@ $title = "Zoo - Ticket";
     <link href="css/style.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script src="js/tbooking.js"></script>
 	<style>
 		input::-webkit-outer-spin-button,
 		input::-webkit-inner-spin-button {
@@ -260,31 +261,35 @@ $title = "Zoo - Ticket";
                         <div class="form-group row">
                             <label for="regular" class="col-sm-2 col-form-label">Adult:</label>
                             <div class="col-sm-4">
-                            <input type="number" onkeyup="readData(0);" id="adult" name="adult" placeholder="adult" min="1" required>
+                            <input type="number" onkeyup="readData(0);" id="adult" name="adult" placeholder="adult" min="1" id="availidate" required onblur="return adultValidate();">
                             <input type="text" name="adult_price" id="adult_price" hidden>
+                            <div><span id="adultvalidate" style="color:red;" class="validate"></span></div> 
                             </div>
-                            <div><span id="countValidate" class="validate"></span></div>
+                            
                         </div>
                         <div class="form-group row">
                             <label for="student" class="col-sm-2 col-form-label">Student:</label>
                             <div class="col-sm-4">
-                            <input type="number" id="student" onkeyup="readData(1);" name="student" placeholder="student" min="1" required>
+                            <input type="number" id="student" onkeyup="readData(1);" name="student" placeholder="student" min="1" id="cvalidate" required onblur="return studentValidate();">
                             <input type="text" name="student_price" id="student_price" hidden>
-                            </div>
-                            <div><span id="countValidate1" class="validate"></span></div>
+                            <div><span id="childvalidate" style="color:red;" class="validate"></span></div> 
+                          </div>
+                            
                         </div>
                         <div class="form-group row">
                             <label for="child" class="col-sm-2 col-form-label">Child:</label>
                             <div class="col-sm-4">
-                            <input type="number" id="child" onkeyup="readData(2);" name="child" placeholder="child" min="1" required>
+                            <input type="number" id="child" onkeyup="readData(2);" name="child" placeholder="child" min="1" id="chvalidate" required onblur="return childValidate();">
                             <input type="text" name="child_price" id="child_price" hidden>
+                            <div><span id="cvalidate" style="color:red;" class="validate"></span></div>
                             </div>
-                            <div><span id="countValidate2" class="validate"></span></div>
+                            
                         </div>
                         <div class="form-group row">
                             <label for="date" class="col-sm-2 col-form-label">Date:</label>
                             <div class="col-sm-4">
-                                <input type="date" id="date" name="date" min= "<?php echo date('Y-m-d');?>"required>
+                                <input type="date" id="date" name="date" min= "<?php echo date('Y-m-d');?>"required onblur="return dateValidate();">
+                                <div><span id="datevalidate" style="color:red;" class="validate"></span></div>
                             </div>
                         </div>
                         <!-- <div class="form-group row mt-4">

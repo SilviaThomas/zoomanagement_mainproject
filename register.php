@@ -120,6 +120,7 @@
                                </div>
                             
                      
+                               
                             <div class="form-group">
                                 <input type="email" class="form-input" name="email"  placeholder="Your Email" required/>
                             </div>

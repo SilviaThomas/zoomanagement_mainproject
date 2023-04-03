@@ -175,6 +175,26 @@ if(isset($_POST['submit'])){
 
     }
   }
+  $sql="INSERT INTO tbl_leave(`reg_id`,`reason`,`start_date`,`last_date`,`med_certificate`,`status`) 
+  VALUES('$login_id','$reason','$start_date','$last_date','$filename','pending')";
+{
+
+ 
+ $result=mysqli_query($conn,$sql);
+}
+ //echo $sql;
+if($result){
+ header('location:applyleave.php');
+ // echo '<script>alert("Leave Applied Sucessfully");</script>';
+}else{
+ die(mysqli_error($conn));
+}
+if($result == true ) {
+ echo '<script>alert("sucessfully completed");</script>';
+}
+
+
+
   }
   
 
@@ -188,25 +208,6 @@ if(isset($_POST['submit'])){
   // move_uploaded_file($_FILES["image"]["tmp_name"],"cert_img/".$img);
 
 
-  
-  $sql="INSERT INTO tbl_leave(`reg_id`,`reason`,`start_date`,`last_date`,`med_certificate`,`status`) 
-         VALUES('$login_id','$reason','$start_date','$last_date','$filename','pending')";
-  {
-
-        
-        $result=mysqli_query($conn,$sql);
-  }
-        //echo $sql;
-       if($result){
-        header('location:applyleave.php');
-        // echo '<script>alert("Leave Applied Sucessfully");</script>';
-       }else{
-        die(mysqli_error($conn));
-       }
-       if($result == true ) {
-        echo '<script>alert("sucessfully completed");</script>';
-   }
-      
   
 
 

@@ -66,7 +66,7 @@ require 'dbconnection.php'
                   
                   <th>#</th>
                   <th>Task Name</th>
-                  <th>Assigned From</th>
+              
                   <th>Date</th>
                   <th>Status</th>
                   <th>Comments</th>
