@@ -21,6 +21,7 @@
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="css/ruang-admin.min.css" rel="stylesheet">
+  <script src="js/ticket.js"></script>
   <style>
     .errorWrap {
       padding: 10px;
@@ -87,12 +88,13 @@
                 <input type="hidden" name="vacancy_id" value="">
                 <div class="mb-4 field-required">
                     <label for="class_display_name">Ticket Groups</label>
-                    <input type="text" value="" class="form-control" id="class_display_name" placeholder="Ticket Groups" name="ticket_group" required>
-                </div>
+                    <input type="text" value="" class="form-control" id="class_display_name" placeholder="Ticket Groups" name="ticket_group" required onblur ="return ticketGroupValidate();">
+                    <div><span id="ticketvalidate" style="color:red;" class="validate"></span></div>
+                  </div>
                 <div class="mb-4 field-required">
                 <label for="class_display_name">Price</label>
-                    <input type="text" value="" class="form-control" id="class_display_name" placeholder="Price" name="price" required>
-                    
+                    <input type="text" value="" class="form-control" id="class_display_name" placeholder="Price" name="price" required onblur ="return ticketpriceValidate();">
+                    <div><span id="pricevalidate" style="color:red;" class="validate"></span></div>
                 </div>
                 
                 <button class="btn btn-primary btn-lg btn-block" type="submit" name="submit">ADD</button>

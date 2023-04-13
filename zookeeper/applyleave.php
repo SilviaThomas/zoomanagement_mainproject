@@ -176,7 +176,8 @@ if(isset($_POST['submit'])){
     }
   }
   $sql="INSERT INTO tbl_leave(`reg_id`,`reason`,`start_date`,`last_date`,`med_certificate`,`status`) 
-  VALUES('$login_id','$reason','$start_date','$last_date','$filename','pending')";
+  VALUES(
+    '$reason','$start_date','$last_date','$filename','pending')";
 {
 
  

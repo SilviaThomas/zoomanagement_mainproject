@@ -1,3 +1,10 @@
+<?php
+    session_start();
+    error_reporting(0);
+    include('dbconnection.php');
+    $n =$_SESSION['sid'];
+
+?>
 <html lang="en">
 
 <head>
@@ -76,6 +83,26 @@
       <form class="form-sample"  method="post" onsubmit="lo" enctype="multipart/form-data">
         <div class="user-details">
           <div class="input-box">
+          <div class="input-box">
+          <form  method="post" action="assigntasks.php" name="firstname"  onsubmit="return Register()" enctype="multipart/form-data">
+            <label for="room block">Select Category</label>
+              <select id="firstname" name="firstname" required onblur="validateDropdown()">
+              <option value="" selected disabled>--- Select Option ---</option>
+              <?php
+                include 'dbconnection.php';
+                $assign_type_res= mysqli_query($conn,"SELECT * from tbl_category where status=1");
+                if($assign_type_res && mysqli_num_rows($assign_type_res) > 0){
+                    while($row= mysqli_fetch_array($assign_type_res)){
+                        echo "<option value='".$row['cat_name']."'>".$row['cat_name']."</option>";
+                        // echo "<option value='".$row['roomtype_id']."'>".$row['roomtype']."</option>";
+
+                    } 
+                }
+              ?>
+            </select>
+                
+                
+            </form>
             
             <input type="text" class="form-control" name="AnimalName" id="animalname" placeholder="Animal Name" required onblur="return animalnameValidate()"/>
             <span id="animalnamevalidate" style="color:red;" class="details"></span>
@@ -239,9 +266,9 @@ if(isset($_POST['submit'])){
   
    }
    else{
-
-  $sql="insert into tbl_animals(`AnimalName`,`CageNumber`,`Breed`,`AnimalImage`,`Description`,`status`) 
-        VALUES('$AnimalName','$CageNumber','$Breed','$img','$Description',1)";
+    
+  $sql="insert into tbl_animals(`cat_id`,`AnimalName`,`CageNumber`,`Breed`,`AnimalImage`,`Description`,`status`) 
+        VALUES('$cat_id','$AnimalName','$CageNumber','$Breed','$img','$Description',1)";
         
         $result=mysqli_query($conn,$sql);
    }

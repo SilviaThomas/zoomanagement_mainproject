@@ -12,7 +12,7 @@
             <div class="navbar-collapse collapse ">
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="index.php">Home</a></li>
-                    <li><a href="animals.php">Animals</a></li>
+                    <li><a href="animal.php">Animals</a></li>
                     <li><a href="portfolio.php">Gallery</a></li>
                     <li><a href="about.php">About Us</a></li>
                     <li><a href="contact.php">Contact</a></li>

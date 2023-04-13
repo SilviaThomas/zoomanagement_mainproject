@@ -17,6 +17,19 @@
     Features
   </div>
   <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#packForm1" aria-expanded="true" aria-controls="collapseForm">
+      <i class="fab fa-fw fa-wpforms"></i>
+      <span>Add category</span>
+    </a>
+    <div id="packForm1" class="collapse" aria-labelledby="headingForm" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <h6 class="collapse-header">category</h6>
+        <a class="collapse-item" href="add_category.php">Add Category</a>
+        <a class="collapse-item" href="manage_animals.php">View Category</a>
+      </div>
+    </div>
+  </li>
+  <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#packageForm1" aria-expanded="true" aria-controls="collapseForm">
       <i class="fab fa-fw fa-wpforms"></i>
       <span>Animals</span>

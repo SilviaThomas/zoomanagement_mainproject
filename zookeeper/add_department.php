@@ -21,6 +21,7 @@
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="css/ruang-admin.min.css" rel="stylesheet">
+  <script src="js/dept.js"></script>
   <style>
     .errorWrap {
       padding: 10px;
@@ -76,7 +77,8 @@
         <div class="user-details">
           <div class="input-box">
             <span class="details">Department</span>
-            <input type="text" class="form-control" name="department" id="department" placeholder="department" required>
+            <input type="text" class="form-control" name="department" id="department" placeholder="department" required onblur="return deptValidate();">
+            <div><span id="validatedepartment" style="color:red;" class="validate"></span></div>
           </div>
           <br>
        

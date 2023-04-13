@@ -21,6 +21,7 @@
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="css/ruang-admin.min.css" rel="stylesheet">
+  <script src="js/tasks.js"></script>
   <style>
     .errorWrap {
       padding: 10px;
@@ -87,18 +88,20 @@
                 <input type="hidden" name="vacancy_id" value="">
                 <div class="mb-4 field-required">
                     <label for="class_display_name">TASK NAME</label>
-                    <input type="text" value="" class="form-control" id="taskname" name="taskname" required>
-                </div>
+                    <input type="text" value="" class="form-control" id="taskname" name="taskname" onblur="return tasknameValidate();">
+                    <div><span id="validatetasks" style="color:red;" class="validate"></span></div>
+                  </div>
                 <div class="mb-4 field-required">
                     <label for="v_description">COMMENT</label>
-                    <textarea name="comment" placeholder="...." class="form-control" id="comment" cols="30" rows="5" required></textarea>
-                </div>
+                    <textarea name="comment" placeholder="...." class="form-control" id="comment" cols="30" rows="5"  onblur="return commentValidate();"></textarea>
+                    <div><span id="commenttasks" style="color:red;" class="validate"></span></div>
+                  </div>
     
             
           <div class="input-box">
           <form  method="post" action="assigntasks.php" name="firstname"  onsubmit="return Register()" enctype="multipart/form-data">
             <label for="room block">Assigned to</label>
-              <select id="firstname" name="firstname" required>
+              <select id="firstname" name="firstname" required onblur="validateDropdown()">
               <option value="" selected disabled>--- Select Option ---</option>
               <?php
                 include 'dbconnection.php';
