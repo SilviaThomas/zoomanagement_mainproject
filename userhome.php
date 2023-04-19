@@ -180,6 +180,7 @@ $sid=$_SESSION['sid'];
         ?>
     </a>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+    <li><a class="dropdown-item" href="http://localhost/zoofari-1.0.0/review/">Feedback</a></li>
         <li><a class="dropdown-item" href="logout.php">Logout</a></li>
     </ul>
 </div>
@@ -281,7 +282,7 @@ $sid=$_SESSION['sid'];
             <div class="ratio ratio-16x9">
               <iframe
                 class="embed-responsive-item"
-                src=""
+                src="https://www.youtube.com/watch?v=MuB7HHeuNbc"
                 id="video"
                 allowfullscreen
                 allowscriptaccess="always"

@@ -59,7 +59,7 @@ require 'dbconnection.php'
                         <th>Start Date</th>
                         <th>Last Date  </th>
                         <th>Reason</th>
-                        <th>download</th>
+                        <th>Download</th>
 
 
                         <th>Action</th>

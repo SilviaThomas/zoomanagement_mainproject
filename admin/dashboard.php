@@ -171,4 +171,4 @@
 <script src="js/demo/chart-area-demo.js"></script>  
 </body>
 
-</html>
+</html>/
