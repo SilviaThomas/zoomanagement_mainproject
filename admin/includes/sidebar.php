@@ -109,6 +109,19 @@
     </li>
     <li>
     <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#users" aria-expanded="true" aria-controls="collapseTable">
+      <i class="fas fa-fw fa-table"></i>
+      <span>SENTIMENTAL ANALYSIS</span>
+    </a>
+    <div id="users" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <h6 class="collapse-header">Users</h6>
+        <a class="collapse-item" href="centimental.php">VIEW SITE RATING</a>
+      </div>
+    </div>
+    </li>
+    <li>
+    <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#userss" aria-expanded="true" aria-controls="collapseTable">
       <i class="fas fa-fw fa-table"></i>
       <span>Leave</span>
