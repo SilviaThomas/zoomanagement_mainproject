@@ -76,12 +76,14 @@
     </div>
   </li>
 
+  
+
 
   <li>
   <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#users1" aria-expanded="true" aria-controls="collapseTable">
       <i class="fas fa-fw fa-table"></i>
-      <span>REGISTERED USER</span>
+      <span>Registered user</span>
     </a>
     <div id="users1" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
@@ -97,7 +99,7 @@
     <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#users" aria-expanded="true" aria-controls="collapseTable">
       <i class="fas fa-fw fa-table"></i>
-      <span>MANAGE ZOOKEEPER</span>
+      <span>Manage zookeeper</span>
     </a>
     <div id="users" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
@@ -111,7 +113,7 @@
     <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#users" aria-expanded="true" aria-controls="collapseTable">
       <i class="fas fa-fw fa-table"></i>
-      <span>SENTIMENTAL ANALYSIS</span>
+      <span>Sentimental analysis</span>
     </a>
     <div id="users" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
@@ -138,7 +140,7 @@
     <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#users2" aria-expanded="true" aria-controls="collapseTable">
       <i class="fas fa-fw fa-table"></i>
-      <span>PROFILE</span>
+      <span>Profile</span>
     </a>
     <div id="users2" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
@@ -152,11 +154,11 @@
     <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#users4" aria-expanded="true" aria-controls="collapseTable">
       <i class="fas fa-fw fa-table"></i>
-      <span>TO-DO-TASKS</span>
+      <span>To-do-Tasks</span>
     </a>
     <div id="users4" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
-        <h6 class="collapse-header">TO-DO-TASKS</h6>
+        <h6 class="collapse-header">TO-DO-Tasks</h6>
         <a class="collapse-item" href="createtodotasks.php">CREATE TODO TASK</a>
         <a class="collapse-item" href="viewtodo.php">VIEW MY TODO TASKS</a>
         <a class="collapse-item" href="assigntasks.php">ASSIGN TASKS</a>
@@ -164,6 +166,20 @@
       </div>
     </div>
     </li>
+
+    <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#packageForm24" aria-expanded="true" aria-controls="collapseForm">
+      <i class="fab fa-fw fa-wpforms"></i>
+      <span>AI Based prediction</span>
+    </a>
+    <div id="packageForm24" class="collapse" aria-labelledby="headingForm" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <h6 class="collapse-header">Prediction</h6>
+        <a class="collapse-item" href="predict_an_view.php"><Var>Analytics View</Var></a>
+        <a class="collapse-item" href="real_time_prediction.php"><Var>Predict Now</Var></a>
+      </div>
+    </div>
+  </li>
     
     
     <li class="nav-item">
