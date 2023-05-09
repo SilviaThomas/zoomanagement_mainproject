@@ -75,7 +75,7 @@ require 'dbconnection.php'
                       </thead>
                       <tbody>
                         <?php
-                        $query = "SELECT * FROM tbl_todo where firstname = 'admin' ";
+                        $query = "SELECT * FROM tbl_todo where reg_id = '10' ";
                         $counter = 0;
                         $query_run = mysqli_query($conn, $query);
 

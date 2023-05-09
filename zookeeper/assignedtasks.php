@@ -71,7 +71,6 @@ $login_id =$_SESSION['sid'];
                   
                   <th>#</th>
                   <th>Task Name</th>
-              
                   <th>Date</th>
                   <th>Status</th>
                   <th>Time </th>
@@ -111,7 +110,7 @@ $login_id =$_SESSION['sid'];
                                     <td>
                                     <?php
 										if($todo['status']!="completed"){
-											echo '<a href="done.php?id='.$todo["todo_id"].'" class="btn btn-success btn-sm">DONE</a>';
+											echo '<a href="donn.php?id='.$todo["todo_id"].'" class="btn btn-success btn-sm">DONE</a>';
 										}
 										else{
 											echo '<small>Already action performed</small>';
