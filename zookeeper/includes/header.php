@@ -1,13 +1,4 @@
-<?php
-  $conn = mysqli_connect('localhost','root','','zooproject');
-  
-  if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error."<br>");
-  }
-  else{
-    // echo "Success";
-  }
-?>
+
 <div id="content">
 
                 <!-- Topbar -->
@@ -182,7 +173,7 @@
 
                           
                         <?php
-                        $sel = "SELECT *  FROM tbl_login where role='2'";
+                        $sel = "SELECT *  FROM tbl_login where role='2' AND login_id='$login_id'";
                         $query = mysqli_query($conn,$sel);
                         $resul = mysqli_fetch_assoc($query);
                         ?>

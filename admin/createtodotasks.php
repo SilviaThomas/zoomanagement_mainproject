@@ -1,6 +1,5 @@
 <?php
     session_start();
-    error_reporting(0);
     include('dbconnection.php');
     $login_id =$_SESSION['sid'];
     ?>
@@ -97,11 +96,12 @@
                     <input type="text" value="" class="form-control" id="taskname" name="taskname" required onblur="return tnameValidate();">
                     <div><span id="validatetname" style="color:red;" class="validate"></span></div>  
                   </div>
-                <div class="mb-4 field-required">
-                    <label for="v_description">COMMENT</label>
-                    <textarea name="comment" placeholder="...." class="form-control" id="comment" cols="30" rows="5" required onblur="return commentValidate();"></textarea>
-                    <div><span id="validatetcomment" style="color:red;" class="validate"></span></div>
-                  </div>
+                  <div class="mb-4 field-required">
+    <label for="task_time">TIME</label>
+    <input type="time" value="" class="form-control" id="task_time" name="task_time" onblur="return taskTimeValidate();">
+    <div><span id="validateTime" style="color:red;" class="validate"></span></div>
+</div>
+
                 
                 <button class="btn btn-primary btn-lg btn-block" type="submit" name="submit">Create  my todo</button>
             </form>
@@ -126,10 +126,10 @@ if(isset($_POST['submit'])){
 
   $taskname = $_POST['taskname'];
 //   $ta_date = $_POST['start_date'];
-  $comment = $_POST['comment'];
+  $task_time = $_POST['task_time'];
   
-  $sql="insert into tbl_todo(`reg_id`,`taskname`,`comment`,`firstname`,`status`) 
-        VALUES('$login_id','$taskname','$comment','admin','pending')";
+  $sql="insert into tbl_todo(`reg_id`,`taskname`,`task_time`,`status`) 
+        VALUES('$login_id','$taskname','$task_time','pending')";
         
         $result=mysqli_query($conn,$sql);
         //echo $sql;

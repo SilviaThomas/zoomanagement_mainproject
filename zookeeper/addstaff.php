@@ -13,20 +13,10 @@
         function validate()
         {
           var fullname;
-          //dept,gender,email,mobile,photo,dob,doj,address;
+          
           fullname=document.getElementById('fullname').value.trim();                       
           
-          // dept=document.getElementById('gender').value.trim();
           
-          // email=document.getElementById('email').value.trim();
-          
-          // phone=document.getElementById('phone').value.trim();
-          
-          // photo=document.getElementById('photo');
-
-          // dob=document.getElementById('dob').value.trim();
-          
-          // doj=document.getElementById('join_date').value.trim();
 
           if(fullname=="")
           {

@@ -25,7 +25,7 @@
     <form action="#" method="POST">
       <div class="field email">
         <div class="input-area">
-          <input type="email" name="email" placeholder="abcd@gmail.com" required>
+          <input type="email" name="email"  id="email" placeholder="abcd@gmail.com" required>
           <i class="icon fas fa-envelope"></i>
           <i class="error error-icon fas fa-exclamation-circle"></i>
         </div>
@@ -33,7 +33,7 @@
       </div>
       <div class="field password">
         <div class="input-area">
-          <input type="password" name="log_password" placeholder="Password" required>
+          <input type="password" name="log_password" id="password" placeholder="Password" required>
           <i class="icon fas fa-lock"></i>
           <i class="error error-icon fas fa-exclamation-circle"></i>
         </div>

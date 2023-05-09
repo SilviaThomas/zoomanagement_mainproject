@@ -1,6 +1,11 @@
 <?php
 
-require 'dbconnection.php'
+session_start();
+error_reporting(0);
+include('dbconnection.php');
+$login_id =$_SESSION['sid'];
+
+
 
 ?>
 
@@ -69,7 +74,7 @@ require 'dbconnection.php'
               
                   <th>Date</th>
                   <th>Status</th>
-                  <th>Comments</th>
+                  <th>Time </th>
                   <th>Action</th>
                 </tr>
                 <tr>
@@ -77,7 +82,16 @@ require 'dbconnection.php'
                 </thead>
                       <tbody>
                         <?php
-                        $query = "SELECT * FROM tbl_todo where firstname = 'admin' ";
+                        $login_id_sql="SELECT * from tbl_zookeeperreg WHERE login_id= $login_id";
+                        $login_query= mysqli_query($conn, $login_id_sql);
+                        if($login_query){
+                          $reg_id= mysqli_fetch_array($login_query)['reg_id'];
+                        }
+                        else{
+                          $reg_id=-1;
+                          echo "<script>alert('Unable to get the data !!');";
+                        }
+                        $query = "SELECT * FROM tbl_todo where reg_id = '$reg_id' ";
                         $counter = 0;
                         $query_run = mysqli_query($conn, $query);
 
@@ -93,7 +107,7 @@ require 'dbconnection.php'
                                     <td><?=$todo['taskname'];?></td>
                                     <td><?=$todo['date'];?></td>
                                     <td><?=$todo['status'];?></td>
-                                    <td><?=$todo['comment'];?></td>
+                                    <td><?=$todo['task_time'];?></td>
                                     <td>
                                     <?php
 										if($todo['status']!="completed"){

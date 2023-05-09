@@ -68,7 +68,7 @@ require 'dbconnection.php'
                         <th>task name</th>
                         <th>date</th>
                         <th>status</th>
-                        <th>comment</th>
+                        <th>Time</th>
                         <th>Action</th>
                         
                       </tr>
@@ -90,8 +90,8 @@ require 'dbconnection.php'
                                     
                                     <td><?=$todo['taskname'];?></td>
                                     <td><?=$todo['date'];?></td>
+                                    <td><?=$todo['task_time'];?></td>
                                     <td><?=$todo['status'];?></td>
-                                    <td><?=$todo['comment'];?></td>
                                     <td>
                                     <?php
 										if($todo['status']!="completed"){

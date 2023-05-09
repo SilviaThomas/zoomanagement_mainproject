@@ -138,7 +138,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
     function predictNow(){
       const dateInput = document.getElementById("days").value;
       if(dateInput == null || dateInput == ""){
-        alert("pleae provide a date")
+        alert("please provide a date")
         return
       }
       var date = getSeason(dateInput)

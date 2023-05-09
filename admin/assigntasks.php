@@ -91,11 +91,12 @@
                     <input type="text" value="" class="form-control" id="taskname" name="taskname" onblur="return tasknameValidate();">
                     <div><span id="validatetasks" style="color:red;" class="validate"></span></div>
                   </div>
-                <div class="mb-4 field-required">
-                    <label for="v_description">COMMENT</label>
-                    <textarea name="comment" placeholder="...." class="form-control" id="comment" cols="30" rows="5"  onblur="return commentValidate();"></textarea>
-                    <div><span id="commenttasks" style="color:red;" class="validate"></span></div>
-                  </div>
+                  <div class="mb-4 field-required">
+    <label for="task_time">TIME</label>
+    <input type="time" value="" class="form-control" id="task_time" name="task_time" onblur="return taskTimeValidate();">
+    <div><span id="validateTime" style="color:red;" class="validate"></span></div>
+</div>
+
     
             
           <div class="input-box">
@@ -108,9 +109,9 @@
                 $assign_type_res= mysqli_query($conn,"SELECT * from tbl_zookeeperreg where status=1");
                 if($assign_type_res && mysqli_num_rows($assign_type_res) > 0){
                     while($row= mysqli_fetch_array($assign_type_res)){
-                        echo "<option value='".$row['firstname']."'>".$row['firstname']."</option>";
+                        
+                        echo "<option value='".$row['reg_id']."'>".$row['firstname']."</option>";
                         // echo "<option value='".$row['roomtype_id']."'>".$row['roomtype']."</option>";
-
                     } 
                 }
               ?>
@@ -136,14 +137,15 @@ else{
 if(isset($_POST['submit'])){
 //   $vaccancy_position = $_POST['taskname'];
 //   $vaccancy_description = $_POST['comment'];
-
+  $login_id=$_POST['firstname'];
   $taskname = $_POST['taskname'];
 //   $ta_date = $_POST['start_date'];
-  $comment = $_POST['comment'];
-  $firstname = $_POST['firstname'];
+$task_time = $_POST['task_time'];
   
-  $sql="insert into tbl_todo(`taskname`,`comment`,`firstname`,`status`) 
-        VALUES('$taskname','$comment','$firstname','pending')";
+
+  
+  $sql="insert into tbl_todo(`reg_id`,`taskname`,`task_time`,`status`) 
+        VALUES('$login_id','$taskname','$task_time','pending')";
         
         $result=mysqli_query($conn,$sql);
         //echo $sql;

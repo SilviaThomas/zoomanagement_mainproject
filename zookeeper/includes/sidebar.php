@@ -75,11 +75,11 @@
   
 
     <li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#users2" aria-expanded="true" aria-controls="collapseTable">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#users23" aria-expanded="true" aria-controls="collapseTable">
       <i class="fas fa-fw fa-table"></i>
       <span>PROFILE</span>
     </a>
-    <div id="users2" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
+    <div id="users23" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Users</h6>
         <a class="collapse-item" href="myprofile.php">MY PROFILE</a>
