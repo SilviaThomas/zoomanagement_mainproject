@@ -202,7 +202,7 @@
                                                 <div class="card-body">
                                                     <h5 class="card-title">'.$animal_name.'</h5>
                                                     <p class="card-text">'.$animal_breed.'</p>
-                                                    <a href="animal_description.php?aid='.$animal_id.'" class="btn btn-primary">View Details</a>
+                                                    <a href="animal_description.php?aid='.$animal_id.'" class="btn btn-primary"></a>
                                                 </div>
                                             </div>
                                         ';

@@ -1,8 +1,16 @@
+
 <?php
-    session_start();
-    error_reporting(0);
-    include('dbconnection.php');
+session_start();
+include "dbconnection.php";
+$sql = "SELECT * FROM `tbl_animals` WHERE STATUS = 1 ";
+$result = mysqli_query($conn,$sql);
+
+
 ?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -129,7 +137,7 @@
           <a href="userhome.php" class="nav-item nav-link active">Home</a>
           <a href="about.php" class="nav-item nav-link">About</a>
           <a href="service.php" class="nav-item nav-link">Services</a>
-        
+          <a href="Gallery.php" class="nav-item nav-link">Gallery</a>
           
           <a href="viewuservaccancy.php" class="nav-item nav-link">Vaccancies</a>
           <!-- <a href="Register.php" class="nav-item nav-link">Registration</a>
@@ -162,7 +170,15 @@
     </nav>
     <div id="wrapper">
 		
-		
+		<section id="inner-headline">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<h2 class="pageTitle">OUR ANIMALS</h2>
+					</div>
+				</div>
+			</div>
+		</section>
 		<section id="content">
 
 			<div class="container">
@@ -177,35 +193,38 @@
                 <div class="container">
                     <div class="row box-section">
 
-                    <?php
-    include 'dbconnection.php';
-    $animal_data_res = mysqli_query($conn, "SELECT * from tbl_category WHERE status='1'");
-    if ($animal_data_res) {
-        if (mysqli_num_rows($animal_data_res) > 0) {
-            while ($row = mysqli_fetch_array($animal_data_res)) {
-                $cat_id = $row['cat_id'];
-                $cat_name = $row['cat_name'];
-                $animal_image = $row['photo'];
-
-                echo '
-                <div class="animal-card" style="width: 30rem;">
-                    <a href="Animalcat.php?cat_id=' . $cat_id . '">
-                        <img class="card-img-top" src="admin/cat_img/' . $animal_image . '" alt="' . $cat_name . '">
-                        <div class="card-body">
-                            <h5 class="card-title">' . $cat_name . '</h5>
-                        </div>
-                    </a>
-                </div>
-                ';
-            }
-        } else {
-            echo "No data !!";
-        }
-    } else {
-        echo "Wrong query !!";
-    }
-?>
-
+                        <?php
+                            include 'dbconnection.php';
+                            $cat_id=$_GET['cat_id'];
+                            $animal_data_res= mysqli_query($conn,"SELECT * from tbl_animals WHERE cat_id=$cat_id");
+                            if($animal_data_res){
+                                if(mysqli_num_rows($animal_data_res) > 0){
+                                    while($row= mysqli_fetch_array($animal_data_res)){
+                                        $animal_id= $row['animal_id'];
+                                        $animal_name= $row['AnimalName'];
+                                        $animal_breed= $row['Breed'];
+                                        $animal_image= $row['AnimalImage'];
+    
+                                        echo '
+                                            <div class="animal-card" style="width: 18rem;">
+                                                <img class="card-img-top" src="admin/an_image/'.$animal_image.'" alt="'.$animal_name.'">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">'.$animal_name.'</h5>
+                                                    <p class="card-text">'.$animal_breed.'</p>
+                                                    <a href="animal_description.php?aid='.$animal_id.'" class="btn btn-primary">View deatils</a>
+                                                </div>
+                                            </div>
+                                        ';
+                                    }
+                                }
+                                else{
+                                    echo "No data !!";
+                                }
+                            }
+                            else{
+                                echo "Wrong query !!";
+                            }
+                        ?>
                     </div>
                 </div>
             </section>
@@ -351,3 +370,80 @@
     <script src="js/main.js"></script>
   </body>
 </html>
+
+
+<div class="row1" >
+                <?php while($row = $result->fetch_assoc()) { 
+                  
+                    $roomtype = $row['roomtype_id'];
+                    if($typeid == $roomtype)
+                    {
+                    $animal_id = $row['animal_id'];
+                    // $roomblock = $row['room_block'];
+                    // $roomnumber = $row['room_number'];
+                    // $Description = $row['Description'];
+                    // $choose_room = $row['choose_room'];
+                    
+                    $image_src = "an_image/".$animal_id;
+                    // $url= ($row['0'])
+                ?>
+                <div class="column"><center>
+                    <a href="">
+                <div class="card ">
+                    
+                        <img src="<?php echo $image_src; ?>" alt="brand" style="width:100%">
+                        <div class="container">
+                          <!-- <h5><?php echo $roomtype;?></h5> -->
+                          <!-- <h5>Room Block :<?php echo $roomblock;?></h5>
+                          <h5>Room Number:<?php echo $roomnumber;?></h5> -->
+                        
+                          <h5>Services:<?php echo $multipleData;?></h5>
+                          <!-- <h5>Price  :<?php echo $price;?></h5> -->
+                          <h4>₹ <?php echo $price;?></h4>
+                          <!-- 
+                             -->
+
+                         
+                        </div>
+                    
+                    </div>
+                    </center>
+                </div>
+                </a>
+                 <?php } 
+                 }
+                 ?>
+            </div>
+                </div>
+                <p class="col-md-6 text-right social">
+            <a href="#"><span class="fa fa-tripadvisor"></span></a>
+            <a href="#"><span class="fa fa-facebook"></span></a>
+            <a href="#"><span class="fa fa-twitter"></span></a>
+            <a href="#"><span class="fa fa-linkedin"></span></a>
+            <a href="#"><span class="fa fa-vimeo"></span></a>
+          </p>
+        </div>
+      </div>
+    </footer> 
+    
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.stellar.min.js"></script>
+    <script src="js/jquery.fancybox.min.js"></script>
+    
+    
+    <script src="js/aos.js"></script>
+    
+    <script src="js/bootstrap-datepicker.js"></script> 
+    <script src="js/jquery.timepicker.min.js"></script> 
+
+    
+
+    <script src="js/main.js"></script>
+  </body>
+</html>
+
+

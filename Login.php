@@ -44,7 +44,7 @@
       
       
       <div class="pass-txt"><a href="login-system-main/recover_psw.php">Forgot password?</a></div>
-      <input type="submit" name="submit" value="Login">
+      <input type="submit" id="submit" name="submit" value="Login">
     </form>
     
     

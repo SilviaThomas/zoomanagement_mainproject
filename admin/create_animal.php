@@ -86,14 +86,14 @@
           <div class="input-box">
           <form  method="post" action="assigntasks.php" name="firstname"  onsubmit="return Register()" enctype="multipart/form-data">
             <label for="room block">Select Category</label>
-              <select id="firstname" name="firstname" required onblur="validateDropdown()">
+              <select id="category" name="category" required onblur="validateDropdown()">
               <option value="" selected disabled>--- Select Option ---</option>
               <?php
                 include 'dbconnection.php';
                 $assign_type_res= mysqli_query($conn,"SELECT * from tbl_category where status=1");
                 if($assign_type_res && mysqli_num_rows($assign_type_res) > 0){
                     while($row= mysqli_fetch_array($assign_type_res)){
-                        echo "<option value='".$row['cat_name']."'>".$row['cat_name']."</option>";
+                        echo "<option value='".$row['cat_id']."'>".$row['cat_name']."</option>";
                         // echo "<option value='".$row['roomtype_id']."'>".$row['roomtype']."</option>";
 
                     } 
@@ -245,19 +245,21 @@ else{
 
 
 if(isset($_POST['submit'])){
+  $cat_id = $_POST['category'];
   $AnimalName = $_POST['AnimalName'];
   $CageNumber = $_POST['CageNumber'];
   // $FeedNumber= $_POST['FeedNumber'];
   $Breed = $_POST['Breed'];
   $img=$_FILES["image"]["name"];
-	echo $img;
+	// echo $img;
   //$AnimalImage=$_FILES['AnimalImage'];
   $Description=$_POST['Description'];
   //$CreationDate=$_POST['CreationDate'];
   // $AnimalImage=$_FILES["AnimalImage"]["name"];
   move_uploaded_file($_FILES["image"]["tmp_name"],"an_image/".$img);
-  $query = "SELECT * FROM `tbl_animals` Where CageNumber='$CageNumber'";
+  $query = "SELECT * FROM `tbl_animals` where CageNumber='$CageNumber'";
   $result = mysqli_query($conn,$query);
+
   
    if(mysqli_num_rows($result)>0)
    {

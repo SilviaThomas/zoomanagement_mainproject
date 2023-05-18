@@ -109,7 +109,7 @@
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Available Room
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Available Tickets
                         </div>
                         <div class="row no-gutters align-items-center">
                             <div class="col-auto">

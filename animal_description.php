@@ -129,7 +129,7 @@
           <a href="userhome.php" class="nav-item nav-link active">Home</a>
           <a href="about.php" class="nav-item nav-link">About</a>
           <a href="service.php" class="nav-item nav-link">Services</a>
-        
+          <a href="Gallery.php" class="nav-item nav-link">Gallery</a>
           
           <a href="viewuservaccancy.php" class="nav-item nav-link">Vaccancies</a>
           <!-- <a href="Register.php" class="nav-item nav-link">Registration</a>
@@ -142,7 +142,7 @@
               data-bs-toggle="dropdown"
               >Animals</a -->
             <!-- > -->
-            <a href="animals.php" class="nav-item nav-link">Animals</a>
+            <a href="animal.php" class="nav-item nav-link">Animals</a>
             <!-- <div class="dropdown-menu rounded-0 rounded-bottom m-0">
               <a href="animals.php" class="dropdown-item"> Animals</a> -->
               <!-- <a href="membership.html" class="dropdown-item">Membership</a>
@@ -160,53 +160,54 @@
       </div>
       <a href="logout.php" class="nav-item nav-link">Logout</a>
     </nav>
-    <div id="wrapper">
+
 		
 		
-		<section id="content">
-
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
-						<!-- <div class="aligncenter"><h2 class="aligncenter">Our Animals</h2>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores quae porro consequatur aliquam, incidunt eius magni provident, doloribus omnis minus ovident, doloribus omnis minus temporibus perferendis nesciunt..</div> -->
-						<br/>
-					</div>
-				</div>
-        <div id="wrapper">            
-            <section id="animal-content">
-                <div class="container">
-                    <div class="row box-section">
-
-                    <?php
-    include 'dbconnection.php';
-    $animal_data_res = mysqli_query($conn, "SELECT * from tbl_category WHERE status='1'");
-    if ($animal_data_res) {
-        if (mysqli_num_rows($animal_data_res) > 0) {
-            while ($row = mysqli_fetch_array($animal_data_res)) {
-                $cat_id = $row['cat_id'];
-                $cat_name = $row['cat_name'];
-                $animal_image = $row['photo'];
-
-                echo '
-                <div class="animal-card" style="width: 30rem;">
-                    <a href="Animalcat.php?cat_id=' . $cat_id . '">
-                        <img class="card-img-top" src="admin/cat_img/' . $animal_image . '" alt="' . $cat_name . '">
-                        <div class="card-body">
-                            <h5 class="card-title">' . $cat_name . '</h5>
-                        </div>
-                    </a>
-                </div>
-                ';
-            }
-        } else {
-            echo "No data !!";
+<html>
+<head>
+    <style>
+        .center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 50vh;
         }
-    } else {
-        echo "Wrong query !!";
-    }
-?>
+    </style>
+</head>
+<body>
+    <div class="center">
+        <?php
+            include 'dbconnection.php';
+            $animal_id = $_GET['aid'];
+            $animal_query = mysqli_query($conn, "SELECT * FROM tbl_animals WHERE animal_id = $animal_id");
+            if ($animal_query) {
+                if (mysqli_num_rows($animal_query) > 0) {
+                    $animal_data = mysqli_fetch_assoc($animal_query);
+                    $animal_name = $animal_data['AnimalName'];
+                    $animal_breed = $animal_data['Breed'];
+                    $animal_description = $animal_data['Description'];
+                    $animal_image = $animal_data['AnimalImage'];
 
-                    </div>
+                    echo '
+                        <div class="animal-details">
+                            <h2>'.$animal_name.'</h2>
+                            <img src="admin/an_image/'.$animal_image.'" alt="'.$animal_name.'">
+                            <p>Breed: '.$animal_breed.'</p>
+                            <p>Description: '.$animal_description.'</p>
+                        </div>
+                    ';
+                } else {
+                    echo "Animal not found.";
+                }
+            } else {
+                echo "Query error.";
+            }
+        ?>
+    </div>
+</body>
+</html>
+
+   </div>
                 </div>
             </section>
         </div>
@@ -351,3 +352,4 @@
     <script src="js/main.js"></script>
   </body>
 </html>
+

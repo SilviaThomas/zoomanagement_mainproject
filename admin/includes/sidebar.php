@@ -89,7 +89,7 @@
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Users</h6>
         <a class="collapse-item" href="user_register.php">Register User</a>
-        <a class="collapse-item" href="Permissions.php">User Permissions</a>
+       
       </div>
     </div>
   </li>
@@ -105,7 +105,7 @@
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Users</h6>
         <a class="collapse-item" href="addzookeeper.php">ADD ZOOKEEPER</a>
-        <a class="collapse-item" href="viewzookeeper.php">VIEW ZOOKEEPER</a>
+        <!-- <a class="collapse-item" href="viewzookeeper.php">VIEW ZOOKEEPER</a> -->
       </div>
     </div>
     </li>
@@ -145,7 +145,7 @@
     <div id="users2" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Users</h6>
-        <a class="collapse-item" href="myprofile.php">MY PROFILE</a>
+        <!-- <a class="collapse-item" href="myprofile.php">MY PROFILE</a> -->
         <a class="collapse-item" href="changepassword.php">CHANGE PASSWORD</a>
       </div>
     </div>

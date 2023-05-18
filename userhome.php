@@ -222,6 +222,7 @@ $sid=$_SESSION['sid'];
     </a>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
     <li><a class="dropdown-item" href="http://localhost/zoofari-1.0.0/review/">Feedback</a></li>
+    <li><a class="dropdown-item" href="profileedit.php">Profile</a></li>
         <li><a class="dropdown-item" href="logout.php">Logout</a></li>
     </ul>
 </div>

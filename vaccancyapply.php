@@ -142,7 +142,7 @@
               data-bs-toggle="dropdown"
               >Animals</a -->
             <!-- > -->
-            <a href="animals.php" class="nav-item nav-link">Animals</a>
+            <a href="animal.php" class="nav-item nav-link">Animals</a>
             <!-- <div class="dropdown-menu rounded-0 rounded-bottom m-0">
               <a href="animals.php" class="dropdown-item"> Animals</a> -->
               <!-- <a href="membership.html" class="dropdown-item">Membership</a>
@@ -281,8 +281,9 @@ input[type=submit]:hover {
       </div>
       <div class="col-75">
       
-      <input id="pdf" type="file" name="pdf" value="" required><br><br>
-                
+          <input type="file" name="pdf_file"
+                 class="form-control" accept=".pdf"
+                 title="Upload PDF"/>
       
     </div>
 
@@ -313,32 +314,17 @@ if(isset($_POST['submit'])){
   $fullname= $_POST['fullname'];
   $email = $_POST['email'];
   $phone= $_POST['phone'];
-  $pdf=$_FILES['pdf']['name'];
-          $pdf_type=$_FILES['pdf']['type'];
-          $pdf_size=$_FILES['pdf']['size'];
-          $pdf_tem_loc=$_FILES['pdf']['tmp_name'];
-          $pdf_store="pdf/".$pdf;
-          move_uploaded_file($pdf_tem_loc,$pdf_store);
-  // $pdf=$_FILES['pdf']['name'];
-  // $pdf_type=$_FILES['pdf']['type'];
-  // $pdf_size=$_FILES['pdf']['size'];
-  // $pdf_tem_loc=$_FILES['pdf']['tmp_name'];
-  // $pdf_store="D:\xampp\htdocs\zoofari-1.0.0\pdf".$pdf;
 
-  // move_uploaded_file($pdf_tem_loc,$pdf_store);
-
-
-  // $img=$_FILES["pdf_file"]["name"];
-	// echo $img;
+  $img=$_FILES["pdf_file"]["name"];
+	echo $img;
  
   
-  // move_uploaded_file($_FILES["pdf_file"]["tmp_name"],"D:\xampp\htdocs\zoofari-1.0.0\admin\pdf".$img);
+  move_uploaded_file($_FILES["pdf_file"]["tmp_name"],"D:\xampp\htdocs\zoofari-1.0.0\admin\pdf".$img);
 	$vacancy_id=$_SESSION['vaccancy_id'];
-  $sql="INSERT INTO `tbl_application`(vaccancy_id,`fullname`, `email`, `phone`, `pdf`, `status`) 
-        VALUES('$vacancy_id','$fullname','$email','$phone','$pdf',1)";
+  $sql="INSERT INTO `tbl_application`(vaccancy_id,`fullname`, `email`, `phone`, `cv`, `status`) 
+        VALUES('$vacancy_id','$fullname','$email','$phone','$img',1)";
         
         $result=mysqli_query($conn,$sql);
-}
         //echo $sql;
        if($result){
         header('location:vaccancyapply.php');
@@ -465,4 +451,5 @@ if(isset($_POST['submit'])){
     <script src="js/main.js"></script>
   </body>
 </html>
+
 

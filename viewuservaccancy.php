@@ -129,7 +129,6 @@
           <a href="userhome.php" class="nav-item nav-link active">Home</a>
           <a href="about.php" class="nav-item nav-link">About</a>
           <a href="service.php" class="nav-item nav-link">Services</a>
-          <a href="Gallery.php" class="nav-item nav-link">Gallery</a>
           
           <a href="viewuservaccancy.php" class="nav-item nav-link">Vaccancies</a>
           <!-- <a href="Register.php" class="nav-item nav-link">Registration</a>
@@ -142,7 +141,7 @@
               data-bs-toggle="dropdown"
               >Animals</a -->
             <!-- > -->
-            <a href="animals.php" class="nav-item nav-link">Animals</a>
+            <a href="animal.php" class="nav-item nav-link">Animals</a>
             <!-- <div class="dropdown-menu rounded-0 rounded-bottom m-0">
               <a href="animals.php" class="dropdown-item"> Animals</a> -->
               <!-- <a href="membership.html" class="dropdown-item">Membership</a>

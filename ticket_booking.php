@@ -179,7 +179,7 @@ $title = "Zoo - Ticket";
               data-bs-toggle="dropdown"
               >Animals</a -->
             <!-- > -->
-            <a href="animals.php" class="nav-item nav-link">Animals</a>
+            <a href="animal.php" class="nav-item nav-link">Animals</a>
             <!-- <div class="dropdown-menu rounded-0 rounded-bottom m-0">
               <a href="animals.php" class="dropdown-item"> Animals</a> -->
               <!-- <a href="membership.html" class="dropdown-item">Membership</a>

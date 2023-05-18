@@ -8,5 +8,5 @@ if(mysqli_query($conn,$sql4))
 {
     $_SESSION['msg2'] = " activated successfully";
 }
-header("Location: viewtodo.php");
+header("Location:assignedtasks.php");
 ?>
