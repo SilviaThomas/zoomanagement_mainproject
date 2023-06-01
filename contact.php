@@ -1,3 +1,7 @@
+<?php session_start(); 
+include('dbconnection.php');
+$sid=$_SESSION['sid'];
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -116,15 +120,8 @@
           <a href="about.php" class="nav-item nav-link">About</a>
           <a href="service.php" class="nav-item nav-link">Services</a>
           <a href="viewuservaccancy.php" class="nav-item nav-link">Vaccancies</a>
-          <div class="nav-item dropdown">
-            <a
-              href="#"
-              class="nav-link dropdown-toggle"
-              data-bs-toggle="dropdown"
-              >Pages</a
-            >
-            <div class="dropdown-menu rounded-0 rounded-bottom m-0">
-              <a href="Gallery.php" class="dropdown-item">Our Animals</a>
+          <a href="animal.php" class="nav-item nav-link">Animals</a>
+         
               <!-- <a href="membership.html" class="dropdown-item">Membership</a>
               <a href="visiting.html" class="dropdown-item">Visiting Hours</a>
               <a href="testimonial.html" class="dropdown-item">Testimonial</a>
@@ -137,6 +134,22 @@
           >Buy Ticket<i class="fa fa-arrow-right ms-3"></i
         ></a>
       </div>
+      <div class="dropdown">
+    <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="bi bi-person"></i>
+        <?php
+            $sel = "SELECT `email` FROM `tbl_login` where `login_id`=$sid";
+            $query = mysqli_query($conn,$sel);
+            $resul = mysqli_fetch_assoc($query);
+            echo $resul['email'];
+        ?>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+    <li><a class="dropdown-item" href="http://localhost/zoofari-1.0.0/review/">Feedback</a></li>
+    <li><a class="dropdown-item" href="profileedit.php">Profile</a></li>
+        <li><a class="dropdown-item" href="logout.php">Logout</a></li>
+    </ul>
+</div>
     </nav>
     <!-- Navbar End -->
 
@@ -154,9 +167,7 @@
             <li class="breadcrumb-item">
               <a class="text-white" href="#">Home</a>
             </li>
-            <li class="breadcrumb-item">
-              <a class="text-white" href="#">Pages</a>
-            </li>
+           
             <li class="breadcrumb-item text-primary active" aria-current="page">
               Contact Us
             </li>
@@ -215,10 +226,7 @@
             <p><span class="text-primary me-2">#</span>Contact Us</p>
             <h1 class="display-5 mb-4">Have Any Query? Please Contact Us!</h1>
             <p class="mb-4">
-              The contact form is currently inactive. Get a functional and
-              working contact form with Ajax & PHP in a few minutes. Just copy
-              and paste the files, add a little code and you're done.
-              <a href="https://htmlcodex.com/contact-form">Download Now</a>.
+              
             </p>
             <form>
               <div class="row g-3">

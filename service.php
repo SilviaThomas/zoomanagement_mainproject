@@ -1,3 +1,7 @@
+<?php session_start(); 
+include('dbconnection.php');
+$sid=$_SESSION['sid'];
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -115,17 +119,28 @@
           <a href="userhome.php" class="nav-item nav-link">Home</a>
           <a href="about.php" class="nav-item nav-link">About</a>
           <a href="service.php" class="nav-item nav-link active">Services</a>
-          <div class="nav-item dropdown">
+          <a href="viewuservaccancy.php" class="nav-item nav-link">Vaccancies</a>
+          <!-- <a href="Register.php" class="nav-item nav-link">Registration</a>
+          <a href="Login.php" class="nav-item nav-link">Login</a> -->
+          
+          <!-- <div class="nav-item dropdown">
             <a
               href="#"
               class="nav-link dropdown-toggle"
               data-bs-toggle="dropdown"
-              >Pages</a
-            >
-            <div class="dropdown-menu rounded-0 rounded-bottom m-0">
-              <a href="animals.html" class="dropdown-item">Our Animals</a>
-              
+              >Animals</a -->
+            <!-- > -->
+            <a href="animal.php" class="nav-item nav-link">Animals</a>
+            <!-- <div class="dropdown-menu rounded-0 rounded-bottom m-0">
+              <a href="animals.php" class="dropdown-item"> Animals</a> -->
+              <!-- <a href="membership.html" class="dropdown-item">Membership</a>
+              <a href="visiting.html" class="dropdown-item">Visiting Hours</a>
+              <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+              <a href="404.html" class="dropdown-item">404 Page</a> -->
             </div>
+           </div>
+           
+          
           </div>
           <a href="contact.php" class="nav-item nav-link">Contact</a>
         </div>
@@ -133,6 +148,23 @@
           >Buy Ticket<i class="fa fa-arrow-right ms-3"></i
         ></a>
       </div>
+      <div class="dropdown">
+    <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="bi bi-person"></i>
+        <?php
+            $sel = "SELECT `email` FROM `tbl_login` where `login_id`=$sid";
+            $query = mysqli_query($conn,$sel);
+            $resul = mysqli_fetch_assoc($query);
+            echo $resul['email'];
+        ?>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+    <li><a class="dropdown-item" href="http://localhost/zoofari-1.0.0/review/">Feedback</a></li>
+    <li><a class="dropdown-item" href="profileedit.php">Profile</a></li>
+        <li><a class="dropdown-item" href="logout.php">Logout</a></li>
+    </ul>
+</div>
+
     </nav>
     <!-- Navbar End -->
 

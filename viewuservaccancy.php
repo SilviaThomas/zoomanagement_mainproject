@@ -1,7 +1,6 @@
-<?php
-    session_start();
-    error_reporting(0);
-    include('dbconnection.php');
+<?php session_start(); 
+include('dbconnection.php');
+$sid=$_SESSION['sid'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -157,7 +156,22 @@
           >Buy Ticket<i class="fa fa-arrow-right ms-3"></i
         ></a>
       </div>
-      <a href="logout.php" class="nav-item nav-link">Logout</a>
+      <div class="dropdown">
+    <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="bi bi-person"></i>
+        <?php
+            $sel = "SELECT `email` FROM `tbl_login` where `login_id`=$sid";
+            $query = mysqli_query($conn,$sel);
+            $resul = mysqli_fetch_assoc($query);
+            echo $resul['email'];
+        ?>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+    <li><a class="dropdown-item" href="http://localhost/zoofari-1.0.0/review/">Feedback</a></li>
+    <li><a class="dropdown-item" href="profileedit.php">Profile</a></li>
+        <li><a class="dropdown-item" href="logout.php">Logout</a></li>
+    </ul>
+
     </nav>
     <div id="wrapper">
 		
@@ -199,7 +213,7 @@
                                                     <div class="text-right">
                                                     <a class="btn btn-primary" href="vaccancyapply.php">Apply</a>
                                                     
-                                                    <a class="btn btn-primary" href="myhistory.php">History</a>
+                                                    
                                                 
                                                     </div>
                                                     

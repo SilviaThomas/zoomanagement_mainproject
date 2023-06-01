@@ -25,7 +25,7 @@
   <meta name="author" content="">
   <link href="img/logo/logo.png" rel="icon">
   <title>Admin - Create Animal</title>
-  <script src="js\createanimal.js"></script>
+  <!-- <script src="js\createanimal.js"></script> -->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="css/ruang-admin.min.css" rel="stylesheet">

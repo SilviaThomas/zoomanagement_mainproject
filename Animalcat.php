@@ -1,14 +1,9 @@
 
-<?php
-session_start();
-include "dbconnection.php";
-$sql = "SELECT * FROM `tbl_animals` WHERE STATUS = 1 ";
-$result = mysqli_query($conn,$sql);
 
-
+<?php session_start(); 
+include('dbconnection.php');
+$sid=$_SESSION['sid'];
 ?>
-
-
 
 
 <!DOCTYPE html>
@@ -150,7 +145,7 @@ $result = mysqli_query($conn,$sql);
               data-bs-toggle="dropdown"
               >Animals</a -->
             <!-- > -->
-            <a href="animals.php" class="nav-item nav-link">Animals</a>
+            <a href="animal.php" class="nav-item nav-link">Animals</a>
             <!-- <div class="dropdown-menu rounded-0 rounded-bottom m-0">
               <a href="animals.php" class="dropdown-item"> Animals</a> -->
               <!-- <a href="membership.html" class="dropdown-item">Membership</a>
@@ -166,7 +161,22 @@ $result = mysqli_query($conn,$sql);
           >Buy Ticket<i class="fa fa-arrow-right ms-3"></i
         ></a>
       </div>
-      <a href="logout.php" class="nav-item nav-link">Logout</a>
+      <div class="dropdown">
+    <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="bi bi-person"></i>
+        <?php
+            $sel = "SELECT `email` FROM `tbl_login` where `login_id`=$sid";
+            $query = mysqli_query($conn,$sel);
+            $resul = mysqli_fetch_assoc($query);
+            echo $resul['email'];
+        ?>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+    <li><a class="dropdown-item" href="http://localhost/zoofari-1.0.0/review/">Feedback</a></li>
+    <li><a class="dropdown-item" href="profileedit.php">Profile</a></li>
+        <li><a class="dropdown-item" href="logout.php">Logout</a></li>
+    </ul>
+</div>
     </nav>
     <div id="wrapper">
 		
@@ -196,7 +206,7 @@ $result = mysqli_query($conn,$sql);
                         <?php
                             include 'dbconnection.php';
                             $cat_id=$_GET['cat_id'];
-                            $animal_data_res= mysqli_query($conn,"SELECT * from tbl_animals WHERE cat_id=$cat_id");
+                            $animal_data_res= mysqli_query($conn,"SELECT * from tbl_animals WHERE status='1'AND cat_id=$cat_id");
                             if($animal_data_res){
                                 if(mysqli_num_rows($animal_data_res) > 0){
                                     while($row= mysqli_fetch_array($animal_data_res)){
@@ -367,81 +377,6 @@ $result = mysqli_query($conn,$sql);
     <script src="lib/lightbox/js/lightbox.min.js"></script>
 
     <!-- Template Javascript -->
-    <script src="js/main.js"></script>
-  </body>
-</html>
-
-
-<div class="row1" >
-                <?php while($row = $result->fetch_assoc()) { 
-                  
-                    $roomtype = $row['roomtype_id'];
-                    if($typeid == $roomtype)
-                    {
-                    $animal_id = $row['animal_id'];
-                    // $roomblock = $row['room_block'];
-                    // $roomnumber = $row['room_number'];
-                    // $Description = $row['Description'];
-                    // $choose_room = $row['choose_room'];
-                    
-                    $image_src = "an_image/".$animal_id;
-                    // $url= ($row['0'])
-                ?>
-                <div class="column"><center>
-                    <a href="">
-                <div class="card ">
-                    
-                        <img src="<?php echo $image_src; ?>" alt="brand" style="width:100%">
-                        <div class="container">
-                          <!-- <h5><?php echo $roomtype;?></h5> -->
-                          <!-- <h5>Room Block :<?php echo $roomblock;?></h5>
-                          <h5>Room Number:<?php echo $roomnumber;?></h5> -->
-                        
-                          <h5>Services:<?php echo $multipleData;?></h5>
-                          <!-- <h5>Price  :<?php echo $price;?></h5> -->
-                          <h4>₹ <?php echo $price;?></h4>
-                          <!-- 
-                             -->
-
-                         
-                        </div>
-                    
-                    </div>
-                    </center>
-                </div>
-                </a>
-                 <?php } 
-                 }
-                 ?>
-            </div>
-                </div>
-                <p class="col-md-6 text-right social">
-            <a href="#"><span class="fa fa-tripadvisor"></span></a>
-            <a href="#"><span class="fa fa-facebook"></span></a>
-            <a href="#"><span class="fa fa-twitter"></span></a>
-            <a href="#"><span class="fa fa-linkedin"></span></a>
-            <a href="#"><span class="fa fa-vimeo"></span></a>
-          </p>
-        </div>
-      </div>
-    </footer> 
-    
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/jquery-migrate-3.0.1.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/jquery.stellar.min.js"></script>
-    <script src="js/jquery.fancybox.min.js"></script>
-    
-    
-    <script src="js/aos.js"></script>
-    
-    <script src="js/bootstrap-datepicker.js"></script> 
-    <script src="js/jquery.timepicker.min.js"></script> 
-
-    
-
     <script src="js/main.js"></script>
   </body>
 </html>
